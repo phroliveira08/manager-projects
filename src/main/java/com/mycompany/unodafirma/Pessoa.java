@@ -14,19 +14,19 @@ public class Pessoa {
     private String cargo;
     
     public Pessoa(String nome, String username, String email, String senha, String telefone, String cargo){
-        setNome(nome);
-        setUsername(username);
-        setEmail(email);
-        setSenha(senha);
-        setTelefone(telefone);
-        setCargo(cargo);
+        this.nome = nome;
+        this.username = username;
+        this.email = email;
+        this.senha = senha;
+        this.telefone = telefone;
+        this.cargo = cargo;
     }
 
     public String getNome() {
         return nome;
     }
 
-    private void setNome(String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -34,7 +34,7 @@ public class Pessoa {
         return username;
     }
 
-    private void setUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -42,7 +42,7 @@ public class Pessoa {
         return email;
     }
 
-    private void setEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -50,7 +50,7 @@ public class Pessoa {
         return senha;
     }
 
-    private void setSenha(String senha) {
+    public void setSenha(String senha) {
         this.senha = senha;
     }
 
@@ -58,7 +58,7 @@ public class Pessoa {
         return telefone;
     }
 
-    private void setTelefone(String telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
@@ -66,7 +66,7 @@ public class Pessoa {
         return cargo;
     }
 
-    private void setCargo(String cargo) {
+    public void setCargo(String cargo) {
         this.cargo = cargo;
     }
     
