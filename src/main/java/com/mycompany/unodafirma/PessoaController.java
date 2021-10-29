@@ -18,7 +18,7 @@ public class PessoaController {
     }
     
     public void salvarPessoaDB(Pessoa pessoa){
-        String nome = pessoa.getNome();
+        String nome = pessoa.getNomeCompleto();
         String senha = pessoa.getSenha();
         String email = pessoa.getEmail();
         String username = pessoa.getUsername();

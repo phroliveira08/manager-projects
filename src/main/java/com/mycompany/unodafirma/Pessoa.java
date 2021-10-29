@@ -6,15 +6,15 @@
 package com.mycompany.unodafirma;
 
 public class Pessoa {
-    private String nome;
+    private String nomeCompleto;
     private String username;
     private String email;
     private String senha;
     private String telefone;
     private String cargo;
     
-    public Pessoa(String nome, String username, String email, String senha, String telefone, String cargo){
-        this.nome = nome;
+    public Pessoa(String nomeCompleto, String username, String email, String senha, String telefone, String cargo){
+        this.nomeCompleto = nomeCompleto;
         this.username = username;
         this.email = email;
         this.senha = senha;
@@ -22,12 +22,12 @@ public class Pessoa {
         this.cargo = cargo;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeCompleto() {
+        return nomeCompleto;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
     }
 
     public String getUsername() {
