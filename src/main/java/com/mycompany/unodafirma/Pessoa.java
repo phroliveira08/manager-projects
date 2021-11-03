@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package com.mycompany.unodafirma;
-
+/**
+ *
+ * @author Pedro
+ */
 public class Pessoa {
     private String nomeCompleto;
     private String username;
