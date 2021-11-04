@@ -98,7 +98,8 @@ public class AddRequisitoJFrame extends javax.swing.JFrame {
         
         requisito.setDescricao(descricaoText.getText());
 //        requisito.setFuncional(); //verificar como recuperar o radioButton selecionado
-
+        requisito.setFuncional(true);
+        
         boolean retorno = _requisitoBusiness.Adicionar(requisito);
         
         if (retorno) {
