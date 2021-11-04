@@ -47,7 +47,7 @@ public class PessoaDataAccess {
     }
     
     public boolean Adicionar(Pessoa pessoa){
-        String sql = "INSERT INTO tb_pessoas(nomeCompleto, username, email, senha, telefone, cargo) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Usuario(nomeCompleto, username, email, senha, telefone, cargo) VALUES (?, ?, ?, ?, ?, ?)";
         
         String nomeCompleto = pessoa.getNomeCompleto();
         String username = pessoa.getUsername();
@@ -73,6 +73,8 @@ public class PessoaDataAccess {
     }
     
     public boolean Atualizar(Pessoa pessoa){
+        String sqlUpdate = "update Usuario set NomeCompleto = ?, Senha = ?, Email = ?, Telefone = ?, Cargo = ? where Username = ?";
+        
         String nome = pessoa.getNomeCompleto();
         String senha = pessoa.getSenha();
         String email = pessoa.getEmail();
@@ -80,17 +82,42 @@ public class PessoaDataAccess {
         String telefone = pessoa.getTelefone();
         String cargo = pessoa.getCargo();
         //UPDATE...
-        return true;
+        //return true;
+        try{
+            PreparedStatement ps = c.prepareStatement(sqlUpdate);
+            ps.setString(1, nome);
+            ps.setString(2, senha);
+            ps.setString(3, email);
+            ps.setString(4, telefone);
+            ps.setString(5, cargo);
+            ps.setString(6, username);
+            ps.execute();
+            return true;
+        }catch(SQLException e){
+            e.printStackTrace();
+            return false;
+        }
     }
     
     public boolean Excluir(String username){
+        String sqlDelete = "delete from Usuario where Username = ?;";
+        
         //DELETE...
-        return true;
+        //return true;
+        try{
+            PreparedStatement ps = c.prepareStatement(sqlDelete);
+            ps.setString(1, username);
+            ps.execute();
+            return true;
+        }catch(SQLException e){
+            e.printStackTrace();
+            return false;
+        }
     }
     
     public boolean Consultar(String username){
         //SELECT * FROM TABELA WHERE ID = id
-        String sql = "SELECT * FROM tb_pessoas WHERE username = ?";
+        String sql = "SELECT * FROM Usuario WHERE username = ?";
         String nomeCompleto = null;
         String email = null;
         String senha = null;
