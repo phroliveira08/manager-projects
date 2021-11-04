@@ -73,7 +73,7 @@ public class PessoaDataAccess {
     }
     
     public boolean Atualizar(Pessoa pessoa){
-        String sqlUpdate = "update Usuario set NomeCompleto = ?, Senha = ?, Email = ?, Telefone = ?, Cargo = ? where Username = ?";
+        String sqlUpdate = "update usuario set nomeCompleto = ?, senha = ?, email = ?, telefone = ?, cargo = ? where username = ?";
         
         String nome = pessoa.getNomeCompleto();
         String senha = pessoa.getSenha();
@@ -100,7 +100,7 @@ public class PessoaDataAccess {
     }
     
     public boolean Excluir(String username){
-        String sqlDelete = "delete from Usuario where Username = ?;";
+        String sqlDelete = "delete from usuario where username = ?;";
         
         //DELETE...
         //return true;
@@ -117,7 +117,7 @@ public class PessoaDataAccess {
     
     public boolean Consultar(String username){
         //SELECT * FROM TABELA WHERE ID = id
-        String sql = "SELECT * FROM Usuario WHERE username = ?";
+        String sql = "SELECT * FROM usuario WHERE username = ?";
         String nomeCompleto = null;
         String email = null;
         String senha = null;
