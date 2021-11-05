@@ -27,10 +27,10 @@ public class ConexaoBD {
         String servidor = "localhost"; //alterar com base no servidor criado no MySQL de cada um
         String porta = "3306";
         String database = "UDF";
-        return DriverManager.getConnection("jdbc:mysql://" + servidor + ":" + porta + "/" + database + "?useTimezone=true&serverTimezone=UTC", "root", "admin"); //alterar com base na senha do MySQL de cada um
-    }
-
-    public static void desconectar(Connection conn) throws SQLException {
-        conn.close();
+        return DriverManager.getConnection(
+            "jdbc:mysql://" + servidor + ":" + porta + "/" + database + "?useTimezone=true&serverTimezone=UTC", 
+            "root", 
+            "admin" //alterar com base na senha do MySQL de cada um
+        ); 
     }
 }
