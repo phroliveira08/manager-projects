@@ -10,13 +10,15 @@ package com.mycompany.unodafirma;
  * @author Luis Henrique
  */
 public class Projeto {
-
+    
+    //criação das variaveis
     private int id_projeto;
     private String nomeProjeto;
     private String descricao;
     private String usuarioProprietario;
     private String fk_id_requisitos;
-
+    
+    //Construtor
     public Projeto(int id_projeto, String nomeProjeto, String descricao, String usuarioProprietario, String fk_id_requisitos) {
         this.id_projeto = id_projeto;
         this.nomeProjeto = nomeProjeto;
@@ -24,7 +26,8 @@ public class Projeto {
         this.usuarioProprietario = usuarioProprietario;
         this.fk_id_requisitos = fk_id_requisitos;
     }
-
+    
+    //Metodos getters e setter (acesso e modificação)
     public int getId_projeto() {
         return id_projeto;
     }
