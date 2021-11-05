@@ -45,7 +45,7 @@ public class ProjetoDataAccess {
         return lstProjeto;
     }
 
-    public boolean Adicionar(Requisito requisito) {
+    public boolean Adicionar(Projeto projeto) {
         //INSERT INTO...
         String sql = "INSERT INTO projeto(nomeProjeto, descricao, usuarioProprietario, fk_id_requisitos) VALUES (?, ?, ?, ?, ?)";
 
@@ -63,7 +63,7 @@ public class ProjetoDataAccess {
         }
     }
 
-    public boolean Atualizar(Requisito requisito) {
+    public boolean Atualizar(Projeto projeto) {
         //UPDATE...
         String sqlUpdate = "update projeto set nomeProjeto = ?, descricao = ? where id_projeto = ?";
         
