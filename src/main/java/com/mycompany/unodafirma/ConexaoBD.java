@@ -33,4 +33,8 @@ public class ConexaoBD {
             "admin" //alterar com base na senha do MySQL de cada um
         ); 
     }
+    
+    public static void desconectar(Connection conn) throws SQLException {
+        conn.close();
+    }
 }
