@@ -47,14 +47,13 @@ public class ProjetoDataAccess {
 
     public boolean Adicionar(Projeto projeto) {
         //INSERT INTO...
-        String sql = "INSERT INTO projeto(nomeProjeto, descricao, usuarioProprietario, fk_id_requisitos) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO projeto(nomeProjeto, descricao, usuarioProprietario) VALUES (?, ?, ?)";
 
         try {
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setString(1, projeto.getNomeProjeto());
             ps.setString(2, projeto.getDescricao());
             ps.setString(3, projeto.getUsuarioProprietario());
-            ps.setString(4, projeto.getFk_id_requisitos());
             ps.execute();
             return true;
         } catch (SQLException e) {

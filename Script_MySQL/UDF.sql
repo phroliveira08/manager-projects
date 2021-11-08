@@ -3,12 +3,20 @@ CREATE DATABASE UDF;
 USE UDF;
 
 CREATE TABLE usuario(
-    	username varchar(20) primary key not null,
-    	nomeCompleto varchar(255),
-    	telefone varchar(15),
-    	email varchar(255),
-    	cargo varchar(255),
-    	senha varchar(20)
+	username varchar(20) primary key not null,
+    nomeCompleto varchar(255),
+    telefone varchar(15),
+    email varchar(255),
+    cargo varchar(255),
+    senha varchar(20)
+);
+
+CREATE TABLE projeto(
+	idProjeto int auto_increment primary key not null,
+    nomeProjeto varchar(255),
+    descricao varchar(255),
+    usuarioProprietario varchar(20),
+		foreign key (usuarioProprietario) references usuario(username)
 );
 
 CREATE TABLE requisitos(

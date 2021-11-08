@@ -16,7 +16,6 @@ public class Projeto {
     private String nomeProjeto;
     private String descricao;
     private String usuarioProprietario;
-    private String fk_id_requisitos;
     
     //Construtor
     public Projeto(int id_projeto, String nomeProjeto, String descricao, String usuarioProprietario, String fk_id_requisitos) {
@@ -24,7 +23,6 @@ public class Projeto {
         this.nomeProjeto = nomeProjeto;
         this.descricao = descricao;
         this.usuarioProprietario = usuarioProprietario;
-        this.fk_id_requisitos = fk_id_requisitos;
     }
     
     //Metodos getters e setter (acesso e modificação)
@@ -58,13 +56,5 @@ public class Projeto {
 
     public void setUsuarioProprietario(String usuarioProprietario) {
         this.usuarioProprietario = usuarioProprietario;
-    }
-
-    public String getFk_id_requisitos() {
-        return fk_id_requisitos;
-    }
-
-    public void setFk_id_requisitos(String fk_id_requisitos) {
-        this.fk_id_requisitos = fk_id_requisitos;
     }
 }
