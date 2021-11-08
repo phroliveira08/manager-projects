@@ -5,6 +5,7 @@
  */
 package com.mycompany.unodafirma;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -19,10 +20,10 @@ public class Requisito {
     private Date dataCriacao;
     private String autor;
     private Date dataUltimaAlteracao;
-    private String autorUltimaAuteracao;
-    private double versao;
-    private int prioridade;
-    private int complexidade;
+    private String autorUltimaModificacao;
+    private float versao;
+    private String prioridade;
+    private String complexidade;
     private int esforcoEmHoras;
     private String estado;
     private String fase;
@@ -33,6 +34,10 @@ public class Requisito {
 
     public int getId() {
         return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -83,35 +88,35 @@ public class Requisito {
         this.dataUltimaAlteracao = dataUltimaAlteracao;
     }
 
-    public String getAutorUltimaAuteracao() {
-        return autorUltimaAuteracao;
+    public String getAutorUltimaModificacao() {
+        return autorUltimaModificacao;
     }
 
-    public void setAutorUltimaAuteracao(String autorUltimaAuteracao) {
-        this.autorUltimaAuteracao = autorUltimaAuteracao;
+    public void setAutorUltimaModificacao(String autorUltimaModificacao) {
+        this.autorUltimaModificacao = autorUltimaModificacao;
     }
 
-    public double getVersao() {
+    public float getVersao() {
         return versao;
     }
 
-    public void setVersao(double versao) {
+    public void setVersao(float versao) {
         this.versao = versao;
     }
 
-    public int getPrioridade() {
+    public String getPrioridade() {
         return prioridade;
     }
 
-    public void setPrioridade(int prioridade) {
+    public void setPrioridade(String prioridade) {
         this.prioridade = prioridade;
     }
 
-    public int getComplexidade() {
+    public String getComplexidade() {
         return complexidade;
     }
 
-    public void setComplexidade(int complexidade) {
+    public void setComplexidade(String complexidade) {
         this.complexidade = complexidade;
     }
 

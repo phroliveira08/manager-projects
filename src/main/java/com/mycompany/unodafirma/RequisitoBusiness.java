@@ -21,9 +21,7 @@ public class RequisitoBusiness {
         _requisitoDA = new RequisitoDataAccess();
     }
     
-    public List<Requisito> Listar(Requisito requisito){
-        List<Requisito> lstRequisitos = new ArrayList<Requisito>();
-        
+    public List<Requisito> Listar(){
         return _requisitoDA.Listar();
     }
     
