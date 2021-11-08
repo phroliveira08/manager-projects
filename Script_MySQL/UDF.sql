@@ -3,12 +3,20 @@ CREATE DATABASE UDF;
 USE UDF;
 
 CREATE TABLE usuario(
-    	username varchar(20) primary key not null,
-    	nomeCompleto varchar(255),
-    	telefone varchar(15),
-    	email varchar(255),
-    	cargo varchar(255),
-    	senha varchar(20)
+	username varchar(20) primary key not null,
+    nomeCompleto varchar(255),
+    telefone varchar(15),
+    email varchar(255),
+    cargo varchar(255),
+    senha varchar(20)
+);
+
+CREATE TABLE projeto(
+	idProjeto int auto_increment primary key not null,
+    nomeProjeto varchar(255),
+    descricao varchar(255),
+    usuarioProprietario varchar(20),
+		foreign key (usuarioProprietario) references usuario(username)
 );
 
 CREATE TABLE requisitos(
@@ -27,15 +35,6 @@ CREATE TABLE requisitos(
 	estado varchar(255), #(Especificado, Em andamento, Finalizado, ...)
 	fase varchar(255),
 	descrição varchar(255),
-    		foreign key (autorUltimaModificacao) references usuario(username)
-);
-
-CREATE TABLE projeto(
-	id_projeto int auto_increment primary key not null,
-    	nomeProjeto varchar(255),
-    	descricao varchar(255),
-    	usuarioProprietario varchar(20),
-    		foreign key (usuarioProprietario) references usuario(username),
-    	fk_id_requisitos int,
-    		foreign key (fk_id_Requisitos) references requisitos(identificador)
+    fk_idProjeto int not null,
+		foreign key (fk_idProjeto) references projeto(idProjeto)
 );
