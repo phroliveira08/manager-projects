@@ -34,7 +34,7 @@ public class ConexaoBD {
         ); 
     }
     
-    public static void desconectar(Connection conn) throws SQLException {
+    public void desconectar(Connection conn) throws SQLException {
         conn.close();
     }
 }

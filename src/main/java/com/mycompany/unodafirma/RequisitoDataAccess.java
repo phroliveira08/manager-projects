@@ -43,11 +43,24 @@ public class RequisitoDataAccess {
 
             //Cria um PreparedStatment, classe usada para executar a query
             pstm = conn.prepareStatement(query);
+            
+            java.util.Date d = new java.util.Date();
+            java.sql.Date sd = new java.sql.Date(d.getTime());
 
-            //Adiciona o valor do primeiro parâmetro da sql
-            pstm.setString(1, requisito.getDescricao());
-            //Adicionar o valor do segundo parâmetro da sql
-            pstm.setBoolean(2, requisito.getFuncional());
+            pstm.setString(1, requisito.getNome());
+            pstm.setString(1, requisito.getModulo());
+            pstm.setString(1, requisito.getFuncionalidade());
+            pstm.setDate(1, new java.sql.Date(requisito.getDataCriacao().getTime()));
+            pstm.setString(1, requisito.getAutor());
+            pstm.setDate(1, new java.sql.Date(requisito.getDataUltimaAlteracao().getTime()));
+            pstm.setString(1, requisito.getAutorUltimaAuteracao());
+            pstm.setDouble(1, requisito.getVersao());
+            pstm.setInt(1, requisito.getPrioridade());
+            pstm.setInt(1, requisito.getComplexidade());
+            pstm.setInt(1, requisito.getEsforcoEmHoras());
+            pstm.setString(1, requisito.getEstado());
+            pstm.setString(1, requisito.getFase());
+            pstm.setString(2, requisito.getDescricao());
 
             //Executa a sql para inserção dos dados
             pstm.execute();
