@@ -118,7 +118,7 @@ public class RequisitoDataAccess {
                 + "SET dataUltimaAlteracao = ?, "
                 + "autorUltimaModificacao = ?, "
                 + "estado = ? "
-                + "WHERE id_requisito = ?";
+                + "WHERE idRequisito = ?";
 
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -150,7 +150,7 @@ public class RequisitoDataAccess {
 
     public boolean Excluir(int id) {
         //DELETE...
-        String query = "DELETE FROM REQUISITOS WHERE id_requisito = ?";
+        String query = "DELETE FROM REQUISITOS WHERE idRequisito = ?";
 
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -180,7 +180,7 @@ public class RequisitoDataAccess {
     public Requisito Consultar(int id) {
         Requisito requisito = null;
 
-        String query = "SELECT * FROM requisitos WHERE id_requisito = ? LIMIT 1";
+        String query = "SELECT * FROM requisitos WHERE idRequisito = ? LIMIT 1";
         
         Connection conn = null;
         PreparedStatement pstm = null;
