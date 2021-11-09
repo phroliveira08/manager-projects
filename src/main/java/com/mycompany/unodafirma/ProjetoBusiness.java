@@ -20,10 +20,7 @@ public class ProjetoBusiness {
         _projetoDA = new ProjetoDataAccess();
     }
     
-    public List<Projeto> Listar(Projeto projeto){
-        List<Projeto> lstProjeto = new ArrayList<Projeto>();
-        
-        
+    public List<Projeto> Listar(){
         return _projetoDA.Listar();
     }
     

@@ -18,6 +18,10 @@ public class Projeto {
     private String usuarioProprietario;
     
     //Construtor
+    public Projeto(){
+        
+    }
+    //Construtor
     public Projeto(int id_projeto, String nomeProjeto, String descricao, String usuarioProprietario, String fk_id_requisitos) {
         this.id_projeto = id_projeto;
         this.nomeProjeto = nomeProjeto;

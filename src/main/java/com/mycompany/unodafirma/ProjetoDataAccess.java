@@ -39,10 +39,34 @@ public class ProjetoDataAccess {
     }
 
     public List<Projeto> Listar() {
-        List<Projeto> lstProjeto = new ArrayList<Projeto>();
+        List<Projeto> lstProjetos = new ArrayList<Projeto>();
 
-        //SELECT...
-        return lstProjeto;
+        Projeto projeto = null;
+
+        String query = "SELECT * FROM projeto";
+        
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        
+        try {
+            conn = conexaoDB.conectar();
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                projeto = new Projeto();
+                projeto.setNomeProjeto(rs.getString("nomeProjeto"));
+                projeto.setUsuarioProprietario(rs.getString("usuarioProprietario"));
+                
+                lstProjetos.add(projeto);
+            }
+
+            return lstProjetos;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public boolean Adicionar(Projeto projeto) {
