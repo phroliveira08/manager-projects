@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.unodafirma;
+package com.mycompany.UI;
+
+import com.mycompany.Model.Requisito;
+import com.mycompany.Business.RequisitoBusiness;
 
 /**
  *

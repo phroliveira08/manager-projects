@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.unodafirma;
+package com.mycompany.Business;
+
+import com.mycompany.DataAccess.PessoaDataAccess;
+import com.mycompany.Model.Pessoa;
 
 /**
  *

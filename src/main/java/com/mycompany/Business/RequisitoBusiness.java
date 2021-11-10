@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.unodafirma;
+package com.mycompany.Business;
 
+import com.mycompany.DataAccess.RequisitoDataAccess;
+import com.mycompany.Model.Requisito;
 import java.util.ArrayList;
 import java.util.List;
 
