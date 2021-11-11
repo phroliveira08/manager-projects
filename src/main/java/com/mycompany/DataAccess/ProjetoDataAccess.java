@@ -120,10 +120,31 @@ public class ProjetoDataAccess {
         }
     }
 
-    public Requisito Consultar(int id) {
-        Requisito requisito = new Requisito();
+    public Projeto Consultar(int id) {
+        Projeto projeto = new Projeto();
         //SELECT * FROM TABELA WHERE ID = id
+        String query = "SELECT * FROM projeto WHERE idProjeto = ? LIMIT 1";
+        
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        
+        try {
+            conn = conexaoDB.conectar();
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                projeto.setNomeProjeto(rs.getString("nomeProjeto "));
+                projeto.setDescricao(rs.getString("descricao"));
+                projeto.setUsuarioProprietario(rs.getString("usuarioProprietario"));
+            }
 
-        return requisito;
+            return projeto;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
