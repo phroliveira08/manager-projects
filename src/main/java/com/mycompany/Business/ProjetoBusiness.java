@@ -45,9 +45,9 @@ public class ProjetoBusiness {
         return retorno;
     }
     
-    public Requisito Consultar(int id){
-        Requisito requisito = _projetoDA.Consultar(id);
+    public Projeto Consultar(int id){
+        Projeto projeto = _projetoDA.Consultar(id);
         
-        return requisito;
+        return projeto;
     }
 }
