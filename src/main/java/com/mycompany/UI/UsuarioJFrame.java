@@ -135,10 +135,14 @@ public class UsuarioJFrame extends javax.swing.JFrame {
 
     private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed
         // TODO add your handling code here:
+        CadastrarUsuario cadu = new CadastrarUsuario();
+        cadu.setVisible(true);
+        cadu.setLocationRelativeTo(null);
     }//GEN-LAST:event_cadastrarActionPerformed
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_cancelarActionPerformed
 
     /**
