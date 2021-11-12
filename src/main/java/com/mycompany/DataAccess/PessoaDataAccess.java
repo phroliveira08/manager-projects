@@ -57,8 +57,8 @@ public class PessoaDataAccess {
         String telefone = pessoa.getTelefone();
         String cargo = pessoa.getCargo();
         
-        try{
-            PreparedStatement ps = c.prepareStatement(sql);
+        try(Connection c = new ConexaoBD().conectar();
+                PreparedStatement ps = c.prepareStatement(sql)){            
             ps.setString(1, nomeCompleto);
             ps.setString(2, username);
             ps.setString(3, email);
