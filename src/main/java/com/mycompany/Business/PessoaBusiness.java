@@ -51,7 +51,6 @@ public class PessoaBusiness {
         if (response) {
             Pessoa pessoa = _pessoaDA.getPessoa();
             String senhaCadastrada = pessoa.getSenha();
-            System.out.println(senhaCadastrada);
             if (password.equals(senhaCadastrada)) {
                 setPessoaLogada(pessoa);
                 if(senhaCadastrada.equals("senha123")){

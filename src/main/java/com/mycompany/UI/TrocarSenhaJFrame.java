@@ -112,7 +112,9 @@ public class TrocarSenhaJFrame extends javax.swing.JFrame {
         if(response){
             _loginJFrame.setVisible(false);
             this.setVisible(false);
-            new MenuPrincipalJFrame(_pessoaBusiness).setVisible(true);
+            MenuPrincipalJFrame telaPrincipal = new MenuPrincipalJFrame(_pessoaBusiness);
+            telaPrincipal.setLocationRelativeTo(this);
+            telaPrincipal.setVisible(true);
             _loginJFrame.dispose();
             this.dispose();
         }else{

@@ -128,7 +128,6 @@ public class PessoaDataAccess {
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
-            System.out.println(ps);
             int numPessoas = 0;
             while(rs.next()){
                 nomeCompleto = rs.getString("nomeCompleto");
@@ -136,7 +135,6 @@ public class PessoaDataAccess {
                 senha = rs.getString("senha");
                 telefone = rs.getString("telefone");
                 cargo = rs.getString("cargo");
-                System.out.println("1");
                 numPessoas++;
             }
             if(numPessoas == 0){

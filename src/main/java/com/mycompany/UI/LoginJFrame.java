@@ -98,6 +98,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void entrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarButtonActionPerformed
@@ -106,18 +107,20 @@ public class LoginJFrame extends javax.swing.JFrame {
         String username = usernameField.getText();
         char[] charSenha = senhaField.getPassword();
         String senha = String.valueOf(charSenha);
-        System.out.println(senha);
         String response = pessoaBusiness.realizarLogin(username, senha);
 
         switch (response) {
             case "Sucesso":
                 this.setVisible(false);
-                new MenuPrincipalJFrame(pessoaBusiness).setVisible(true);
-                this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+                MenuPrincipalJFrame telaPrincipal = new MenuPrincipalJFrame(pessoaBusiness);
+                telaPrincipal.setLocationRelativeTo(this);
+                telaPrincipal.setVisible(true);
                 this.dispose();
                 break;
             case "Sucesso-TrocarSenha":
-                new TrocarSenhaJFrame(pessoaBusiness, this).setVisible(true);
+                TrocarSenhaJFrame telaTrocarSenha = new TrocarSenhaJFrame(pessoaBusiness, this);
+                telaTrocarSenha.setLocationRelativeTo(this);
+                telaTrocarSenha.setVisible(true);
                 break;
             case "SenhaInvalida":
                 JOptionPane.showMessageDialog(null, "Senha incorreta.");
