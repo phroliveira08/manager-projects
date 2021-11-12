@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
  */
 public class CadastrarUsuario extends javax.swing.JFrame {
 
-    private PessoaBusiness pessoa = new PessoaBusiness();
 
     /**
      * Creates new form CadastrarUsuario
@@ -204,6 +203,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
 
     private void SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarActionPerformed
         // TODO add your handling code here:
+        PessoaBusiness pessoa = new PessoaBusiness();
         String nome, telefone, email, cargo, username, senha, validarSenha;
         boolean validacao;
         nome = jTextField1.getText();
