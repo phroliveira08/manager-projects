@@ -35,19 +35,25 @@ public class PessoaBusiness {
         }
     }
 
-    public boolean realizarLogin(String username, String password) {
+    public String realizarLogin(String username, String password) {
         boolean response = _pessoaDA.Consultar(username);
 
         if (response) {
             Pessoa pessoa = _pessoaDA.getPessoa();
             String senhaCadastrada = pessoa.getSenha();
-            if (!password.equals(senhaCadastrada)) {
-                return false; // Senha Invalida.
+            System.out.println(senhaCadastrada);
+            if (password.equals(senhaCadastrada)) {
+                setPessoaLogada(pessoa);
+                if(senhaCadastrada.equals("senha123")){
+                    return "Sucesso-TrocarSenha";
+                }else{
+                    return "Sucesso";
+                }
+            }else{
+                return "SenhaInvalida";
             }
-
-            setPessoaLogada(pessoa);
         }
         
-        return true;
+        return "UsuarioNaoEncontrado";
     }
 }
