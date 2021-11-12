@@ -13,14 +13,14 @@ import javax.swing.JOptionPane;
  * @author Familia
  */
 public class LoginJFrame extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form LoginJFrame
-     */
+     */ 
     public LoginJFrame() {
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -111,7 +111,10 @@ public class LoginJFrame extends javax.swing.JFrame {
 
         switch (response) {
             case "Sucesso":
-                JOptionPane.showMessageDialog(null, "Sucesso.");
+                this.setVisible(false);
+                new MenuPrincipalJFrame(pessoaBusiness).setVisible(true);
+                this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+                this.dispose();
                 break;
             case "Sucesso-TrocarSenha":
                 JOptionPane.showMessageDialog(null, "Trocar Senha.");
@@ -163,6 +166,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LoginJFrame().setVisible(true);
