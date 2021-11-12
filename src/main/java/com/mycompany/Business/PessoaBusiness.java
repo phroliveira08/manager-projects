@@ -34,6 +34,16 @@ public class PessoaBusiness {
             return false;
         }
     }
+    
+    public boolean trocarSenha(String senha, String validaSenha){
+        if (senha.equals(validaSenha)) {
+            this.pessoaLogada.setSenha(senha);
+            boolean response = _pessoaDA.Atualizar(this.pessoaLogada);
+            return response;
+        } else {
+            return false;
+        }
+    }
 
     public String realizarLogin(String username, String password) {
         boolean response = _pessoaDA.Consultar(username);

@@ -117,7 +117,7 @@ public class LoginJFrame extends javax.swing.JFrame {
                 this.dispose();
                 break;
             case "Sucesso-TrocarSenha":
-                JOptionPane.showMessageDialog(null, "Trocar Senha.");
+                new TrocarSenhaJFrame(pessoaBusiness, this).setVisible(true);
                 break;
             case "SenhaInvalida":
                 JOptionPane.showMessageDialog(null, "Senha incorreta.");
