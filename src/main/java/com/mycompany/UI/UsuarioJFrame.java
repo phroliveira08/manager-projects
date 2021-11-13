@@ -36,7 +36,7 @@ public class UsuarioJFrame extends javax.swing.JFrame {
         excluir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaUsuarios = new javax.swing.JTable();
-        sair = new javax.swing.JButton();
+        voltar = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -76,10 +76,10 @@ public class UsuarioJFrame extends javax.swing.JFrame {
         tabelaUsuarios.setShowGrid(false);
         jScrollPane1.setViewportView(tabelaUsuarios);
 
-        sair.setText("Sair");
-        sair.addActionListener(new java.awt.event.ActionListener() {
+        voltar.setText("Voltar");
+        voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sairActionPerformed(evt);
+                voltarActionPerformed(evt);
             }
         });
 
@@ -90,7 +90,7 @@ public class UsuarioJFrame extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(alterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -115,7 +115,7 @@ public class UsuarioJFrame extends javax.swing.JFrame {
                         .addComponent(excluir)
                         .addGap(0, 116, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addComponent(sair)
+                .addComponent(voltar)
                 .addGap(16, 16, 16))
         );
 
@@ -142,10 +142,10 @@ public class UsuarioJFrame extends javax.swing.JFrame {
         cadu.setLocationRelativeTo(null);
     }//GEN-LAST:event_cadastrarActionPerformed
 
-    private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
+    private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-    }//GEN-LAST:event_sairActionPerformed
+    }//GEN-LAST:event_voltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,7 +190,7 @@ public class UsuarioJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton sair;
     private javax.swing.JTable tabelaUsuarios;
+    private javax.swing.JButton voltar;
     // End of variables declaration//GEN-END:variables
 }

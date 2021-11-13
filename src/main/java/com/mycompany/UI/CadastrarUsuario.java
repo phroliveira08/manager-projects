@@ -45,7 +45,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         Salvar = new javax.swing.JButton();
-        sair = new javax.swing.JButton();
+        voltar = new javax.swing.JButton();
         limpar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
@@ -77,10 +77,10 @@ public class CadastrarUsuario extends javax.swing.JFrame {
             }
         });
 
-        sair.setText("Sair");
-        sair.addActionListener(new java.awt.event.ActionListener() {
+        voltar.setText("Voltar");
+        voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sairActionPerformed(evt);
+                voltarActionPerformed(evt);
             }
         });
 
@@ -105,7 +105,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(Salvar)
                         .addGap(18, 18, 18)
-                        .addComponent(sair))
+                        .addComponent(voltar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -165,7 +165,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                     .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sair)
+                    .addComponent(voltar)
                     .addComponent(Salvar)
                     .addComponent(limpar))
                 .addGap(38, 38, 38))
@@ -196,10 +196,10 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         jPasswordField2.setText("");
     }//GEN-LAST:event_limparActionPerformed
 
-    private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
+    private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-    }//GEN-LAST:event_sairActionPerformed
+    }//GEN-LAST:event_voltarActionPerformed
 
     private void SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarActionPerformed
         // TODO add your handling code here:
@@ -275,6 +275,6 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JButton limpar;
-    private javax.swing.JButton sair;
+    private javax.swing.JButton voltar;
     // End of variables declaration//GEN-END:variables
 }
