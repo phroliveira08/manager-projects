@@ -11,6 +11,8 @@ package com.mycompany.UI;
  */
 public class UsuarioJFrame extends javax.swing.JFrame {
 
+    CadastrarUsuario cadu = new CadastrarUsuario();
+    
     /**
      * Creates new form UsuarioJFrame
      */
@@ -34,7 +36,7 @@ public class UsuarioJFrame extends javax.swing.JFrame {
         excluir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaUsuarios = new javax.swing.JTable();
-        cancelar = new javax.swing.JButton();
+        sair = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -74,10 +76,10 @@ public class UsuarioJFrame extends javax.swing.JFrame {
         tabelaUsuarios.setShowGrid(false);
         jScrollPane1.setViewportView(tabelaUsuarios);
 
-        cancelar.setText("Cancelar");
-        cancelar.addActionListener(new java.awt.event.ActionListener() {
+        sair.setText("Sair");
+        sair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelarActionPerformed(evt);
+                sairActionPerformed(evt);
             }
         });
 
@@ -88,7 +90,7 @@ public class UsuarioJFrame extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(alterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -113,7 +115,7 @@ public class UsuarioJFrame extends javax.swing.JFrame {
                         .addComponent(excluir)
                         .addGap(0, 116, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addComponent(cancelar)
+                .addComponent(sair)
                 .addGap(16, 16, 16))
         );
 
@@ -135,15 +137,15 @@ public class UsuarioJFrame extends javax.swing.JFrame {
 
     private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed
         // TODO add your handling code here:
-        CadastrarUsuario cadu = new CadastrarUsuario();
+
         cadu.setVisible(true);
         cadu.setLocationRelativeTo(null);
     }//GEN-LAST:event_cadastrarActionPerformed
 
-    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+    private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_cancelarActionPerformed
+        setVisible(false);
+    }//GEN-LAST:event_sairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,6 +178,7 @@ public class UsuarioJFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new UsuarioJFrame().setVisible(true);
+
             }
         });
     }
@@ -183,11 +186,11 @@ public class UsuarioJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton alterar;
     private javax.swing.JButton cadastrar;
-    private javax.swing.JButton cancelar;
     private javax.swing.JButton excluir;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton sair;
     private javax.swing.JTable tabelaUsuarios;
     // End of variables declaration//GEN-END:variables
 }
