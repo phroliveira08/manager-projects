@@ -52,6 +52,11 @@ public class MenuPrincipalJFrame extends javax.swing.JFrame {
         jButton1.setText("Gerenciador de Usuários");
 
         jButton2.setText("Gerenciador de Projetos");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Relatórios");
 
@@ -120,6 +125,14 @@ public class MenuPrincipalJFrame extends javax.swing.JFrame {
             model.addRow(rowData);
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        ProjetoJFrame menuProjetos = new ProjetoJFrame(_pessoaBusiness, this);
+        menuProjetos.setLocationRelativeTo(this);
+        menuProjetos.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
