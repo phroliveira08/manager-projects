@@ -58,6 +58,7 @@ public class ProjetoDataAccess {
             
             while (rs.next()) {
                 projeto = new Projeto();
+                projeto.setId_projeto(rs.getInt("idProjeto"));
                 projeto.setNomeProjeto(rs.getString("nomeProjeto"));
                 projeto.setUsuarioProprietario(rs.getString("usuarioProprietario"));
                 
@@ -107,11 +108,11 @@ public class ProjetoDataAccess {
 
     public boolean Excluir(int id) {
         //DELETE...
-        String sqlDelete = "delete from projeto where id_projeto = ?;";
+        String sqlDelete = "delete from projeto where idProjeto = ?;";
         
         try{
             PreparedStatement ps = c.prepareStatement(sqlDelete);
-            ps.setInt(1, projeto.getId_projeto());
+            ps.setInt(1, id);
             ps.execute();
             return true;
         }catch(SQLException e){

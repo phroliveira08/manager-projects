@@ -6,6 +6,9 @@
 package com.mycompany.UI;
 
 import com.mycompany.Business.PessoaBusiness;
+import com.mycompany.Business.ProjetoBusiness;
+import com.mycompany.Model.Pessoa;
+import com.mycompany.Model.Projeto;
 
 /**
  *
@@ -14,12 +17,14 @@ import com.mycompany.Business.PessoaBusiness;
 public class CadastrarProjetoJFrame extends javax.swing.JFrame {
 
     private PessoaBusiness _pessoaBusiness;
+    private ProjetoBusiness _projetoBusiness;
     /**
      * Creates new form CadastrarProjetoJFrame
      */
     public CadastrarProjetoJFrame(PessoaBusiness pessoaBusiness) {
         initComponents();
         _pessoaBusiness = pessoaBusiness;
+        _projetoBusiness = new ProjetoBusiness();
     }
 
     /**
@@ -108,6 +113,17 @@ public class CadastrarProjetoJFrame extends javax.swing.JFrame {
 
     private void confirmarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarjButtonActionPerformed
         // TODO add your handling code here:
+        Projeto novoProjeto = new Projeto();
+        String nome = nomejTextField.getText();
+        String descricao = descricaojTextArea.getText();
+        Pessoa pessoa = _pessoaBusiness.getPessoaLogada();
+        String username = pessoa.getUsername();
+        novoProjeto.setNomeProjeto(nome);
+        novoProjeto.setDescricao(descricao);
+        novoProjeto.setUsuarioProprietario(username);
+        _projetoBusiness.Adicionar(novoProjeto);
+        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_confirmarjButtonActionPerformed
 
     private void cancelarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarjButtonActionPerformed

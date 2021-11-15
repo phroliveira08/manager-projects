@@ -6,6 +6,13 @@
 package com.mycompany.UI;
 
 import com.mycompany.Business.PessoaBusiness;
+import com.mycompany.Business.ProjetoBusiness;
+import com.mycompany.Model.Projeto;
+import java.util.List;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,6 +22,7 @@ public class ProjetoJFrame extends javax.swing.JFrame {
 
     private PessoaBusiness _pessoaBusiness;
     private MenuPrincipalJFrame _menuPrincipal;
+    private ProjetoBusiness _projetoBusiness;
     
     /**
      * Creates new form ProjetoJFrame
@@ -23,6 +31,7 @@ public class ProjetoJFrame extends javax.swing.JFrame {
         initComponents();
         this._pessoaBusiness = pessoaBusiness;
         this._menuPrincipal = menuPrincipal;
+        _projetoBusiness = new ProjetoBusiness();
     }
 
     /**
@@ -34,8 +43,6 @@ public class ProjetoJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         NovojButton = new javax.swing.JButton();
         DetalharjButton = new javax.swing.JButton();
         AlterarjButton = new javax.swing.JButton();
@@ -44,20 +51,12 @@ public class ProjetoJFrame extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         projetojTable = new javax.swing.JTable();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         NovojButton.setText("Novo Projeto");
         NovojButton.addActionListener(new java.awt.event.ActionListener() {
@@ -94,9 +93,25 @@ public class ProjetoJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Proprietário"
+                "ID", "Nome", "Proprietário"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        projetojTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(projetojTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -144,7 +159,7 @@ public class ProjetoJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+ 
     private void NovojButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NovojButtonActionPerformed
         // TODO add your handling code here:
         //this.setVisible(false);
@@ -159,6 +174,12 @@ public class ProjetoJFrame extends javax.swing.JFrame {
 
     private void ExcluirjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirjButtonActionPerformed
         // TODO add your handling code here:
+        int row = projetojTable.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel)projetojTable.getModel();
+        Object columnId = model.getValueAt(row, 0);
+        Integer id = Integer.parseInt(columnId.toString());
+        model.removeRow(row);
+        _projetoBusiness.Excluir(id);
     }//GEN-LAST:event_ExcluirjButtonActionPerformed
 
     private void VoltarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarjButtonActionPerformed
@@ -167,6 +188,23 @@ public class ProjetoJFrame extends javax.swing.JFrame {
         _menuPrincipal.setVisible(true);
     }//GEN-LAST:event_VoltarjButtonActionPerformed
 
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        List<Projeto> lstProjetos = _projetoBusiness.Listar();
+        
+        DefaultTableModel model = (DefaultTableModel)projetojTable.getModel();
+        Object rowData[] = new Object[3];
+        
+        model.setRowCount(0);
+        
+        for (Projeto item : lstProjetos) {
+            rowData[0] = item.getId_projeto();
+            rowData[1] = item.getNomeProjeto();
+            rowData[2] = item.getUsuarioProprietario();
+            model.addRow(rowData);
+        }
+    }//GEN-LAST:event_formWindowActivated
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AlterarjButton;
@@ -174,9 +212,7 @@ public class ProjetoJFrame extends javax.swing.JFrame {
     private javax.swing.JButton ExcluirjButton;
     private javax.swing.JButton NovojButton;
     private javax.swing.JButton VoltarjButton;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable projetojTable;
     // End of variables declaration//GEN-END:variables
 }
