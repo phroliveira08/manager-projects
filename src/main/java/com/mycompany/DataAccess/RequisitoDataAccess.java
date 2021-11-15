@@ -27,6 +27,50 @@ public class RequisitoDataAccess {
         this.conexaoDB = new ConexaoBD();
     }
 
+    public List<Requisito> Listar(int idProjeto) {
+        List<Requisito> lstRequisitos = new ArrayList<Requisito>();
+
+        Requisito requisito = null;
+
+        String query = "SELECT * FROM requisitos WHERE fk_idProjeto = ?";
+        
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        
+        try {
+            conn = conexaoDB.conectar();
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, idProjeto);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                requisito = new Requisito();
+                requisito.setNome(rs.getString("nome"));
+                requisito.setModulo(rs.getString("modulo"));
+                requisito.setFuncionalidade(rs.getString("funcionalidades"));
+                requisito.setDataCriacao(rs.getDate("dataCriação"));
+                requisito.setAutor(rs.getString("autor"));
+                requisito.setDataUltimaAlteracao(rs.getDate("dataUltimaAlteracao"));
+                requisito.setAutorUltimaModificacao(rs.getString("autorUltimaModificacao"));
+                requisito.setVersao(rs.getFloat("versao"));
+                requisito.setPrioridade(rs.getString("prioridade"));
+                requisito.setComplexidade(rs.getString("complexidade"));
+                requisito.setEsforcoEmHoras(rs.getInt("esfoçoEmHoras"));
+                requisito.setEstado(rs.getString("estado"));
+                requisito.setFase(rs.getString("fase"));
+                requisito.setDescricao(rs.getString("descrição"));
+                
+                lstRequisitos.add(requisito);
+            }
+
+            return lstRequisitos;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
     public List<Requisito> Listar() {
         List<Requisito> lstRequisitos = new ArrayList<Requisito>();
 

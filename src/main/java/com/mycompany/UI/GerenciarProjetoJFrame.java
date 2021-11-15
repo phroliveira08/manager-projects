@@ -14,17 +14,28 @@ import com.mycompany.Model.Projeto;
  *
  * @author Familia
  */
-public class CadastrarProjetoJFrame extends javax.swing.JFrame {
+public class GerenciarProjetoJFrame extends javax.swing.JFrame {
 
     private PessoaBusiness _pessoaBusiness;
     private ProjetoBusiness _projetoBusiness;
+    private String _finalidadeTela;
+    private Projeto _projeto;
     /**
      * Creates new form CadastrarProjetoJFrame
      */
-    public CadastrarProjetoJFrame(PessoaBusiness pessoaBusiness) {
+    public GerenciarProjetoJFrame(PessoaBusiness pessoaBusiness, String finalidadeTela) {
         initComponents();
-        _pessoaBusiness = pessoaBusiness;
-        _projetoBusiness = new ProjetoBusiness();
+        this._pessoaBusiness = pessoaBusiness;
+        this._projetoBusiness = new ProjetoBusiness();
+        this._finalidadeTela = finalidadeTela;
+    }
+    
+    public GerenciarProjetoJFrame(PessoaBusiness pessoaBusiness, String finalidadeTela, Projeto projeto) {
+        initComponents();
+        this._pessoaBusiness = pessoaBusiness;
+        this._projetoBusiness = new ProjetoBusiness();
+        this._finalidadeTela = finalidadeTela;
+        this._projeto = projeto;
     }
 
     /**
@@ -45,6 +56,11 @@ public class CadastrarProjetoJFrame extends javax.swing.JFrame {
         descricaojTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         confirmarjButton.setText("Cadastrar");
         confirmarjButton.addActionListener(new java.awt.event.ActionListener() {
@@ -113,15 +129,23 @@ public class CadastrarProjetoJFrame extends javax.swing.JFrame {
 
     private void confirmarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarjButtonActionPerformed
         // TODO add your handling code here:
-        Projeto novoProjeto = new Projeto();
+        Projeto projeto = new Projeto();
         String nome = nomejTextField.getText();
         String descricao = descricaojTextArea.getText();
-        Pessoa pessoa = _pessoaBusiness.getPessoaLogada();
-        String username = pessoa.getUsername();
-        novoProjeto.setNomeProjeto(nome);
-        novoProjeto.setDescricao(descricao);
-        novoProjeto.setUsuarioProprietario(username);
-        _projetoBusiness.Adicionar(novoProjeto);
+        projeto.setNomeProjeto(nome);
+        projeto.setDescricao(descricao);
+        
+        if(_finalidadeTela.equals("Atualizar")){
+            int idProjeto = _projeto.getId_projeto();
+            projeto.setId_projeto(idProjeto);
+            System.out.println(idProjeto);
+            _projetoBusiness.Atualizar(projeto);
+        }else{
+            Pessoa pessoa = _pessoaBusiness.getPessoaLogada();
+            String username = pessoa.getUsername();
+            projeto.setUsuarioProprietario(username);
+            _projetoBusiness.Adicionar(projeto);
+        }
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_confirmarjButtonActionPerformed
@@ -131,6 +155,17 @@ public class CadastrarProjetoJFrame extends javax.swing.JFrame {
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_cancelarjButtonActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        if(_finalidadeTela.equals("Atualizar")){
+            confirmarjButton.setText("Atualizar");
+            String nome = _projeto.getNomeProjeto();
+            String descricao = _projeto.getDescricao();
+            nomejTextField.setText(nome);
+            descricaojTextArea.setText(descricao);
+        }
+    }//GEN-LAST:event_formWindowActivated
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

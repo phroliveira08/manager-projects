@@ -61,6 +61,7 @@ public class ProjetoDataAccess {
                 projeto.setId_projeto(rs.getInt("idProjeto"));
                 projeto.setNomeProjeto(rs.getString("nomeProjeto"));
                 projeto.setUsuarioProprietario(rs.getString("usuarioProprietario"));
+                projeto.setDescricao(rs.getString("descricao"));
                 
                 lstProjetos.add(projeto);
             }
@@ -91,7 +92,7 @@ public class ProjetoDataAccess {
 
     public boolean Atualizar(Projeto projeto) {
         //UPDATE...
-        String sqlUpdate = "update projeto set nomeProjeto = ?, descricao = ? where id_projeto = ?";
+        String sqlUpdate = "update projeto set nomeProjeto = ?, descricao = ? where idProjeto = ?";
         
         try{
             PreparedStatement ps = c.prepareStatement(sqlUpdate);
@@ -137,7 +138,8 @@ public class ProjetoDataAccess {
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
-                projeto.setNomeProjeto(rs.getString("nomeProjeto "));
+                projeto.setId_projeto(rs.getInt("idProjeto"));
+                projeto.setNomeProjeto(rs.getString("nomeProjeto"));
                 projeto.setDescricao(rs.getString("descricao"));
                 projeto.setUsuarioProprietario(rs.getString("usuarioProprietario"));
             }

@@ -23,6 +23,10 @@ public class RequisitoBusiness {
         _requisitoDA = new RequisitoDataAccess();
     }
     
+    public List<Requisito> Listar(int idProjeto){
+        return _requisitoDA.Listar(idProjeto);
+    }
+    
     public List<Requisito> Listar(){
         return _requisitoDA.Listar();
     }

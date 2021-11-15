@@ -7,7 +7,9 @@ package com.mycompany.UI;
 
 import com.mycompany.Business.PessoaBusiness;
 import com.mycompany.Business.ProjetoBusiness;
+import com.mycompany.Business.RequisitoBusiness;
 import com.mycompany.Model.Projeto;
+import com.mycompany.Model.Requisito;
 import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -18,20 +20,20 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Familia
  */
-public class ProjetoJFrame extends javax.swing.JFrame {
+public class RequisitoJFrame extends javax.swing.JFrame {
 
     private PessoaBusiness _pessoaBusiness;
-    private MenuPrincipalJFrame _menuPrincipal;
-    private ProjetoBusiness _projetoBusiness;
+    private RequisitoBusiness _requisitoBusiness;
+    private Projeto _projeto;
     
     /**
      * Creates new form ProjetoJFrame
      */
-    public ProjetoJFrame(PessoaBusiness pessoaBusiness, MenuPrincipalJFrame menuPrincipal) {
+    public RequisitoJFrame(PessoaBusiness pessoaBusiness, Projeto projeto) {
         initComponents();
         this._pessoaBusiness = pessoaBusiness;
-        this._menuPrincipal = menuPrincipal;
-        _projetoBusiness = new ProjetoBusiness();
+        this._requisitoBusiness = new RequisitoBusiness();
+        this._projeto = projeto;
     }
 
     /**
@@ -49,7 +51,7 @@ public class ProjetoJFrame extends javax.swing.JFrame {
         ExcluirjButton = new javax.swing.JButton();
         VoltarjButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        projetojTable = new javax.swing.JTable();
+        requisitojTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -58,28 +60,23 @@ public class ProjetoJFrame extends javax.swing.JFrame {
             }
         });
 
-        NovojButton.setText("Novo Projeto");
+        NovojButton.setText("Novo Requisito");
         NovojButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NovojButtonActionPerformed(evt);
             }
         });
 
-        DetalharjButton.setText("Detalhar Projeto");
-        DetalharjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DetalharjButtonActionPerformed(evt);
-            }
-        });
+        DetalharjButton.setText("Detalhar Requisito");
 
-        AlterarjButton.setText("Alterar Projeto");
+        AlterarjButton.setText("Alterar Requsito");
         AlterarjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AlterarjButtonActionPerformed(evt);
             }
         });
 
-        ExcluirjButton.setText("Excluir Projeto");
+        ExcluirjButton.setText("Excluir Requsito");
         ExcluirjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ExcluirjButtonActionPerformed(evt);
@@ -93,19 +90,19 @@ public class ProjetoJFrame extends javax.swing.JFrame {
             }
         });
 
-        projetojTable.setModel(new javax.swing.table.DefaultTableModel(
+        requisitojTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nome", "Proprietário", "Descrição"
+                "ID", "Nome", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -116,8 +113,8 @@ public class ProjetoJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        projetojTable.getTableHeader().setReorderingAllowed(false);
-        jScrollPane3.setViewportView(projetojTable);
+        requisitojTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(requisitojTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,78 +165,46 @@ public class ProjetoJFrame extends javax.swing.JFrame {
     private void NovojButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NovojButtonActionPerformed
         // TODO add your handling code here:
         //this.setVisible(false);
-        GerenciarProjetoJFrame menuCadastrarProjeto = new GerenciarProjetoJFrame(_pessoaBusiness, "Cadastrar");
-        menuCadastrarProjeto.setLocationRelativeTo(this);
-        menuCadastrarProjeto.setVisible(true);
+        
     }//GEN-LAST:event_NovojButtonActionPerformed
 
     private void AlterarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarjButtonActionPerformed
         // TODO add your handling code here:
-        int idProjeto = getIdProjetoSelecionado();
-        System.out.println(idProjeto);
-        Projeto projeto = _projetoBusiness.Consultar(idProjeto);
-        System.out.println("Teste");
-        System.out.println(projeto.getId_projeto());
-        GerenciarProjetoJFrame menuCadastrarProjeto = new GerenciarProjetoJFrame(_pessoaBusiness, "Atualizar", projeto);
-        menuCadastrarProjeto.setLocationRelativeTo(this);
-        menuCadastrarProjeto.setVisible(true);
     }//GEN-LAST:event_AlterarjButtonActionPerformed
 
     private void ExcluirjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirjButtonActionPerformed
         // TODO add your handling code here:
-        int row = projetojTable.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel)projetojTable.getModel();
+        int row = requisitojTable.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel)requisitojTable.getModel();
         Object columnId = model.getValueAt(row, 0);
         Integer id = Integer.parseInt(columnId.toString());
         model.removeRow(row);
-        _projetoBusiness.Excluir(id);
+        _requisitoBusiness.Excluir(id);
     }//GEN-LAST:event_ExcluirjButtonActionPerformed
 
     private void VoltarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarjButtonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        _menuPrincipal.setVisible(true);
     }//GEN-LAST:event_VoltarjButtonActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
-        List<Projeto> lstProjetos = _projetoBusiness.Listar();
+        int idProjeto = _projeto.getId_projeto();
+        List<Requisito> lstRequisitos = _requisitoBusiness.Listar(idProjeto);
         
-        DefaultTableModel model = (DefaultTableModel)projetojTable.getModel();
-        Object rowData[] = new Object[4];
+        DefaultTableModel model = (DefaultTableModel)requisitojTable.getModel();
+        Object rowData[] = new Object[3];
         
         model.setRowCount(0);
         
-        for (Projeto item : lstProjetos) {
-            rowData[0] = item.getId_projeto();
-            rowData[1] = item.getNomeProjeto();
-            rowData[2] = item.getUsuarioProprietario();
-            rowData[3] = item.getDescricao();
+        for (Requisito item : lstRequisitos) {
+            rowData[0] = item.getId();
+            rowData[1] = item.getNome();
+            rowData[2] = item.getEstado();
             model.addRow(rowData);
         }
     }//GEN-LAST:event_formWindowActivated
 
-    private void DetalharjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetalharjButtonActionPerformed
-        // TODO add your handling code here:
-        int id = getIdProjetoSelecionado();
-        
-        Projeto projeto = _projetoBusiness.Consultar(id);
-        
-        RequisitoJFrame telaRequisito = new RequisitoJFrame(_pessoaBusiness, projeto);
-        
-        telaRequisito.setLocationRelativeTo(this);
-        telaRequisito.setVisible(true);
-    }//GEN-LAST:event_DetalharjButtonActionPerformed
-
-    private int getIdProjetoSelecionado(){
-        int row = projetojTable.getSelectedRow();
-        
-        DefaultTableModel model = (DefaultTableModel)projetojTable.getModel();
-        Object columnId = model.getValueAt(row, 0);
-        Integer id = Integer.parseInt(columnId.toString());
-        
-        return id;
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AlterarjButton;
@@ -248,6 +213,6 @@ public class ProjetoJFrame extends javax.swing.JFrame {
     private javax.swing.JButton NovojButton;
     private javax.swing.JButton VoltarjButton;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable projetojTable;
+    private javax.swing.JTable requisitojTable;
     // End of variables declaration//GEN-END:variables
 }
