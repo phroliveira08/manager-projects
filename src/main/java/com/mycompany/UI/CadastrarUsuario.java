@@ -14,12 +14,14 @@ import javax.swing.JOptionPane;
  */
 public class CadastrarUsuario extends javax.swing.JFrame {
 
+    private UsuarioJFrame _usuario;
 
     /**
      * Creates new form CadastrarUsuario
      */
-    public CadastrarUsuario() {
+    public CadastrarUsuario(UsuarioJFrame usuario) {
         initComponents();
+        this._usuario = usuario;
     }
 
     /**
@@ -198,7 +200,9 @@ public class CadastrarUsuario extends javax.swing.JFrame {
 
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
         // TODO add your handling code here:
+
         setVisible(false);
+        _usuario.setVisible(true);
     }//GEN-LAST:event_voltarActionPerformed
 
     private void SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarActionPerformed
@@ -213,48 +217,71 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         username = jTextField5.getText();
         senha = jPasswordField1.getText();
         validarSenha = jPasswordField2.getText();
-        validacao = pessoa.cadastrarPessoa(nome, username, email, senha, validarSenha, telefone, cargo);
-        if (validacao == false) {
-            JOptionPane.showMessageDialog(null, "Senhas incompativeis, tente novamente", "Aviso", JOptionPane.WARNING_MESSAGE);
+        if (username.equals("")) {
+            JOptionPane.showMessageDialog(null, "Todos os Campos devem ser preenchidos", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } else if (nome.equals("")) {
+            JOptionPane.showMessageDialog(null, "Todos os Campos devem ser preenchidos", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } else if (telefone.equals("")) {
+            JOptionPane.showMessageDialog(null, "Todos os Campos devem ser preenchidos", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } else if (email.equals("")) {
+            JOptionPane.showMessageDialog(null, "Todos os Campos devem ser preenchidos", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } else if (senha.equals("")) {
+            JOptionPane.showMessageDialog(null, "Todos os Campos devem ser preenchidos", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } else if (validarSenha.equals("")) {
+            JOptionPane.showMessageDialog(null, "Todos os Campos devem ser preenchidos", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } else if (senha.equals(validarSenha)) {
+            validacao = pessoa.cadastrarPessoa(nome, username, email, senha, validarSenha, telefone, cargo);
+            if (validacao == false) {
+                JOptionPane.showMessageDialog(null, "Este usuario já existe!", "Erro", JOptionPane.ERROR_MESSAGE);
+            } else {
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jTextField3.setText("");
+                jTextField4.setText("");
+                jTextField5.setText("");
+                jPasswordField1.setText("");
+                jPasswordField2.setText("");
+                JOptionPane.showMessageDialog(null, "Usuario Cadastrado!","Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            }
         } else {
-            System.exit(0);
+            JOptionPane.showMessageDialog(null, "Senhas incompativeis, tente novamente", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_SalvarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastrarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastrarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastrarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastrarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CadastrarUsuario().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(CadastrarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(CadastrarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(CadastrarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(CadastrarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new CadastrarUsuario().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Salvar;

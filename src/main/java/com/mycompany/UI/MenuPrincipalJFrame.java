@@ -141,9 +141,10 @@ public class MenuPrincipalJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        UsuarioJFrame uf = new UsuarioJFrame();
-        uf.setVisible(true);
-        uf.setLocationRelativeTo(null);
+        UsuarioJFrame _usuario = new UsuarioJFrame(this);
+        _usuario.setVisible(true);
+        _usuario.setLocationRelativeTo(null);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
