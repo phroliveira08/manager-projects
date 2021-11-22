@@ -7,6 +7,7 @@ package com.mycompany.Business;
 
 import com.mycompany.DataAccess.PessoaDataAccess;
 import com.mycompany.Model.Pessoa;
+import java.util.List;
 
 /**
  *
@@ -25,6 +26,10 @@ public class PessoaBusiness {
         this.pessoaLogada = pessoaLogada;
     }
 
+    public List<Pessoa> Listar() {
+        return _pessoaDA.Listar();
+    }
+
     public boolean cadastrarPessoa(String nome, String username, String email, String senha, String validaSenha, String telefone, String cargo) {
         if (senha.equals(validaSenha)) {
             Pessoa pessoa = new Pessoa(nome, username, email, senha, telefone, cargo);
@@ -35,7 +40,37 @@ public class PessoaBusiness {
         }
     }
     
-    public boolean trocarSenha(String senha, String validaSenha){
+    public boolean Atualizar(Pessoa pessoa){
+        boolean retorno = _pessoaDA.Atualizar(pessoa);
+        
+        return retorno;
+    }
+    
+    public boolean AtualizarPessoa(Pessoa pessoa){
+        boolean retorno = _pessoaDA.AtualizarPessoa(pessoa);
+        
+        return retorno;
+    }
+
+    public boolean Excluir(String username) {
+        boolean retorno = _pessoaDA.Excluir(username);
+
+        return retorno;
+    }
+
+    public boolean Consultar(String username) {
+        boolean pessoa = _pessoaDA.Consultar(username);
+
+        return pessoa;
+    }
+    
+    public Pessoa ConsultarAtualiza(String username) {
+        Pessoa pessoa = _pessoaDA.ConsultarAtualiza(username);
+
+        return pessoa;
+    }
+
+    public boolean trocarSenha(String senha, String validaSenha) {
         if (senha.equals(validaSenha)) {
             this.pessoaLogada.setSenha(senha);
             boolean response = _pessoaDA.Atualizar(this.pessoaLogada);
@@ -53,16 +88,16 @@ public class PessoaBusiness {
             String senhaCadastrada = pessoa.getSenha();
             if (password.equals(senhaCadastrada)) {
                 setPessoaLogada(pessoa);
-                if(senhaCadastrada.equals("senha123")){
+                if (senhaCadastrada.equals("senha123")) {
                     return "Sucesso-TrocarSenha";
-                }else{
+                } else {
                     return "Sucesso";
                 }
-            }else{
+            } else {
                 return "SenhaInvalida";
             }
         }
-        
+
         return "UsuarioNaoEncontrado";
     }
 }

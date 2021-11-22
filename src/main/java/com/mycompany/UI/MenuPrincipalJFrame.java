@@ -144,7 +144,7 @@ public class MenuPrincipalJFrame extends javax.swing.JFrame {
         UsuarioJFrame _usuario = new UsuarioJFrame(this);
         _usuario.setVisible(true);
         _usuario.setLocationRelativeTo(null);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     

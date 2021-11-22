@@ -16,6 +16,10 @@ public class Pessoa {
     private String telefone;
     private String cargo;
     
+    public Pessoa(){
+        
+    }
+    
     public Pessoa(String nomeCompleto, String username, String email, String senha, String telefone, String cargo){
         this.nomeCompleto = nomeCompleto;
         this.username = username;

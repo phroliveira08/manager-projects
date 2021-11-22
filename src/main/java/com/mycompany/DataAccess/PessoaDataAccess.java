@@ -40,11 +40,37 @@ public class PessoaDataAccess {
     }
     
     public List<Pessoa> Listar(){
-        List<Pessoa> lstPessoas = new ArrayList();
+        List<Pessoa> lstPessoa = new ArrayList<Pessoa>();
         
-        //SELECT...
+        Pessoa pessoa = null;
+
+        String query = "SELECT * FROM usuario";
         
-        return lstPessoas;
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        
+        try {
+            conn = conexaoDB.conectar();
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                pessoa = new Pessoa();
+                pessoa.setUsername(rs.getString("username"));
+                pessoa.setNomeCompleto(rs.getString("nomeCompleto"));
+                pessoa.setTelefone(rs.getString("telefone"));
+                pessoa.setEmail(rs.getString("email"));
+                pessoa.setCargo(rs.getString("cargo"));
+                
+                lstPessoa.add(pessoa);
+            }
+
+            return lstPessoa;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
     
     public boolean Adicionar(Pessoa pessoa){
@@ -100,6 +126,24 @@ public class PessoaDataAccess {
         }
     }
     
+    public boolean AtualizarPessoa(Pessoa pessoa){
+        String sqlUpdate = "update usuario set nomeCompleto = ?, email = ?, telefone = ?, cargo = ? where username = ?";
+        
+        try{
+            PreparedStatement ps = c.prepareStatement(sqlUpdate);
+            ps.setString(1, pessoa.getNomeCompleto());
+            ps.setString(2, pessoa.getEmail());
+            ps.setString(3, pessoa.getTelefone());
+            ps.setString(4, pessoa.getCargo());
+            ps.setString(5, pessoa.getUsername());
+            ps.execute();
+            return true;
+        }catch(SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
     public boolean Excluir(String username){
         String sqlDelete = "delete from usuario where username = ?;";
         
@@ -146,6 +190,39 @@ public class PessoaDataAccess {
         }catch(SQLException e){
             e.printStackTrace();
             return false;
+        }
+    }
+    public Pessoa ConsultarAtualiza(String username){
+        //SELECT * FROM TABELA WHERE ID = id
+        Pessoa pessoa = new Pessoa();
+        String sql = "SELECT * FROM usuario WHERE username = ?";
+        String nomeCompleto = null;
+        String email = null;
+        String senha = null;
+        String telefone = null;
+        String cargo = null;
+        try{
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            int numPessoas = 0;
+            while(rs.next()){
+                nomeCompleto = rs.getString("nomeCompleto");
+                email = rs.getString("email");
+                senha = rs.getString("senha");
+                telefone = rs.getString("telefone");
+                cargo = rs.getString("cargo");
+                numPessoas++;
+            }
+            if(numPessoas == 0){
+                return null;
+            }
+            Pessoa pessoaResultado = new Pessoa(nomeCompleto, username, email, senha, telefone, cargo);
+            setPessoa(pessoaResultado);
+            return pessoa;
+        }catch(SQLException e){
+            e.printStackTrace();
+            return null;
         }
     }
 }

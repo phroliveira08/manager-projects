@@ -6,6 +6,7 @@
 package com.mycompany.UI;
 
 import com.mycompany.Business.PessoaBusiness;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,14 +14,15 @@ import javax.swing.JOptionPane;
  * @author Familia
  */
 public class LoginJFrame extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form LoginJFrame
-     */ 
+     */
     public LoginJFrame() {
         initComponents();
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,7 +39,6 @@ public class LoginJFrame extends javax.swing.JFrame {
         senhaField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(656, 404));
 
         entrarButton.setText("Entrar");
         entrarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -59,6 +60,11 @@ public class LoginJFrame extends javax.swing.JFrame {
         senhaField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 senhaFieldActionPerformed(evt);
+            }
+        });
+        senhaField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                senhaFieldKeyPressed(evt);
             }
         });
 
@@ -142,6 +148,40 @@ public class LoginJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_senhaFieldActionPerformed
 
+    private void senhaFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_senhaFieldKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            PessoaBusiness pessoaBusiness = new PessoaBusiness();
+            String username = usernameField.getText();
+            char[] charSenha = senhaField.getPassword();
+            String senha = String.valueOf(charSenha);
+            String response = pessoaBusiness.realizarLogin(username, senha);
+
+            switch (response) {
+                case "Sucesso":
+                    this.setVisible(false);
+                    MenuPrincipalJFrame menuPrincipal = new MenuPrincipalJFrame(pessoaBusiness);
+                    menuPrincipal.setLocationRelativeTo(this);
+                    menuPrincipal.setVisible(true);
+                    this.dispose();
+                    break;
+                case "Sucesso-TrocarSenha":
+                    TrocarSenhaJFrame telaTrocarSenha = new TrocarSenhaJFrame(pessoaBusiness, this);
+                    telaTrocarSenha.setLocationRelativeTo(this);
+                    telaTrocarSenha.setVisible(true);
+                    break;
+                case "SenhaInvalida":
+                    JOptionPane.showMessageDialog(null, "Senha incorreta.");
+                    break;
+                case "UsuarioNaoEncontrado":
+                    JOptionPane.showMessageDialog(null, "Não existe este username cadastrado");
+                    break;
+                default:
+                    System.out.println("Erro");
+            }
+        }
+    }//GEN-LAST:event_senhaFieldKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -170,7 +210,6 @@ public class LoginJFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LoginJFrame().setVisible(true);
