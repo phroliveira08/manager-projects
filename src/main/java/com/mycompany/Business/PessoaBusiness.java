@@ -30,25 +30,29 @@ public class PessoaBusiness {
         return _pessoaDA.Listar();
     }
 
-    public boolean cadastrarPessoa(String nome, String username, String email, String senha, String validaSenha, String telefone, String cargo) {
-        if (senha.equals(validaSenha)) {
-            Pessoa pessoa = new Pessoa(nome, username, email, senha, telefone, cargo);
-            boolean response = _pessoaDA.Adicionar(pessoa);
+    public boolean cadastrarPessoa(String nome, String username, String email, String senha, String telefone, String cargo) {
+        //if (senha.equals(validaSenha)) {
+        Pessoa pessoa = new Pessoa(nome, username, email, senha, telefone, cargo);
+        boolean response = _pessoaDA.Adicionar(pessoa);
+        if (response == false) {
             return response;
-        } else {
+        }else{
             return false;
         }
+        //} else {
+        //  return false;
+        //}
     }
-    
-    public boolean Atualizar(Pessoa pessoa){
+
+    public boolean Atualizar(Pessoa pessoa) {
         boolean retorno = _pessoaDA.Atualizar(pessoa);
-        
+
         return retorno;
     }
-    
-    public boolean AtualizarPessoa(Pessoa pessoa){
+
+    public boolean AtualizarPessoa(Pessoa pessoa) {
         boolean retorno = _pessoaDA.AtualizarPessoa(pessoa);
-        
+
         return retorno;
     }
 
@@ -63,7 +67,7 @@ public class PessoaBusiness {
 
         return pessoa;
     }
-    
+
     public Pessoa ConsultarAtualiza(String username) {
         Pessoa pessoa = _pessoaDA.ConsultarAtualiza(username);
 

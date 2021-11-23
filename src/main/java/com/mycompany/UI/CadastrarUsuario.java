@@ -226,18 +226,11 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         Pessoa pessoa = new Pessoa();
         String nome, telefone, email, cargo, username, senha, validarSenha;
         boolean validacao;
-        nome = jTextField1.getText();
-        telefone = jTextField2.getText();
-        email = jTextField3.getText();
-        cargo = jTextField4.getText();
-        username = jTextField5.getText();
-        senha = jPasswordField1.getText();
-        validarSenha = jPasswordField2.getText();
-        pessoa.setNomeCompleto(nome);
-        pessoa.setEmail(email);
-        pessoa.setTelefone(telefone);
-        pessoa.setCargo(cargo);
         if (_finalidadeTela.equals("Atualizar")) {
+            pessoa.setNomeCompleto(jTextField1.getText());
+            pessoa.setTelefone(jTextField2.getText());
+            pessoa.setEmail(jTextField3.getText());
+            pessoa.setCargo(jTextField4.getText());
             username = _pessoa.getUsername();
             pessoa.setUsername(username);
             //System.out.println(username);
@@ -245,7 +238,13 @@ public class CadastrarUsuario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Usuario Alterado!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         } else {
-
+            nome = jTextField1.getText();
+            telefone = jTextField2.getText();
+            email = jTextField3.getText();
+            cargo = jTextField4.getText();
+            username = jTextField5.getText();
+            senha = jPasswordField1.getText();
+            validarSenha = jPasswordField2.getText();
             if (username.equals("")) {
                 JOptionPane.showMessageDialog(null, "Todos os Campos devem ser preenchidos", "Aviso", JOptionPane.WARNING_MESSAGE);
             } else if (nome.equals("")) {
@@ -259,7 +258,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
             } else if (validarSenha.equals("")) {
                 JOptionPane.showMessageDialog(null, "Todos os Campos devem ser preenchidos", "Aviso", JOptionPane.WARNING_MESSAGE);
             } else if (senha.equals(validarSenha)) {
-                validacao = _pessoaBusiness.cadastrarPessoa(nome, username, email, senha, validarSenha, telefone, cargo);
+                validacao = _pessoaBusiness.cadastrarPessoa(nome, username, email, senha, telefone, cargo);
                 if (validacao == false) {
                     JOptionPane.showMessageDialog(null, "Este usuario já existe!", "Erro", JOptionPane.ERROR_MESSAGE);
                 } else {
