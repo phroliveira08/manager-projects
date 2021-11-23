@@ -30,7 +30,7 @@ public class ConexaoBD {
         return DriverManager.getConnection(
             "jdbc:mysql://" + servidor + ":" + porta + "/" + database + "?useTimezone=true&serverTimezone=UTC", 
             "root", 
-            "admin" //alterar com base na senha do MySQL de cada um
+            "klima2" //alterar com base na senha do MySQL de cada um
         ); 
     }
     

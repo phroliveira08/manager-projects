@@ -194,7 +194,6 @@ public class PessoaDataAccess {
     }
     public Pessoa ConsultarAtualiza(String username){
         //SELECT * FROM TABELA WHERE ID = id
-        Pessoa pessoa = new Pessoa();
         String sql = "SELECT * FROM usuario WHERE username = ?";
         String nomeCompleto = null;
         String email = null;
@@ -219,7 +218,7 @@ public class PessoaDataAccess {
             }
             Pessoa pessoaResultado = new Pessoa(nomeCompleto, username, email, senha, telefone, cargo);
             setPessoa(pessoaResultado);
-            return pessoa;
+            return pessoaResultado;
         }catch(SQLException e){
             e.printStackTrace();
             return null;

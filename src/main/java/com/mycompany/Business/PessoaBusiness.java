@@ -33,12 +33,7 @@ public class PessoaBusiness {
     public boolean cadastrarPessoa(String nome, String username, String email, String senha, String telefone, String cargo) {
         //if (senha.equals(validaSenha)) {
         Pessoa pessoa = new Pessoa(nome, username, email, senha, telefone, cargo);
-        boolean response = _pessoaDA.Adicionar(pessoa);
-        if (response == false) {
-            return response;
-        }else{
-            return false;
-        }
+        return _pessoaDA.Adicionar(pessoa);
         //} else {
         //  return false;
         //}

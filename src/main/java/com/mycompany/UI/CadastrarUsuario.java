@@ -40,6 +40,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
 
     public CadastrarUsuario(String finalidadeTela) {
         initComponents();
+        _pessoaBusiness = new PessoaBusiness();
         this._finalidadeTela = finalidadeTela;
     }
 
@@ -258,6 +259,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
             } else if (validarSenha.equals("")) {
                 JOptionPane.showMessageDialog(null, "Todos os Campos devem ser preenchidos", "Aviso", JOptionPane.WARNING_MESSAGE);
             } else if (senha.equals(validarSenha)) {
+                _pessoaBusiness = new PessoaBusiness();
                 validacao = _pessoaBusiness.cadastrarPessoa(nome, username, email, senha, telefone, cargo);
                 if (validacao == false) {
                     JOptionPane.showMessageDialog(null, "Este usuario já existe!", "Erro", JOptionPane.ERROR_MESSAGE);
