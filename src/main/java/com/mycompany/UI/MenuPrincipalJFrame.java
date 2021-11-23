@@ -10,6 +10,7 @@ import com.mycompany.Model.Projeto;
 import com.mycompany.Business.ProjetoBusiness;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import java.util.stream.Collectors;
 /**
  *
  * @author Kelvin
@@ -18,6 +19,8 @@ public class MenuPrincipalJFrame extends javax.swing.JFrame {
 
     private ProjetoBusiness _projetoBusiness;
     private PessoaBusiness _pessoaBusiness;
+    
+    private List<Projeto> _lstProjetos;
     /**
      * Creates new form MenuPrincipalJFrame
      */
@@ -41,6 +44,8 @@ public class MenuPrincipalJFrame extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableProjeto = new javax.swing.JTable();
+        txtFieldFiltro = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -85,6 +90,14 @@ public class MenuPrincipalJFrame extends javax.swing.JFrame {
         tableProjeto.setShowGrid(true);
         jScrollPane1.setViewportView(tableProjeto);
 
+        txtFieldFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFieldFiltroKeyReleased(evt);
+            }
+        });
+
+        jLabel1.setText("Filtrar:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,13 +109,23 @@ public class MenuPrincipalJFrame extends javax.swing.JFrame {
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(txtFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 54, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -118,12 +141,12 @@ public class MenuPrincipalJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        List<Projeto> lstProjetos = _projetoBusiness.Listar();
+        _lstProjetos = _projetoBusiness.Listar();
         
         DefaultTableModel model = (DefaultTableModel)tableProjeto.getModel();
         Object rowData[] = new Object[3];
         
-        for (Projeto item : lstProjetos) {
+        for (Projeto item : _lstProjetos) {
             rowData[0] = item.getNomeProjeto();
             rowData[1] = item.getUsuarioProprietario();
             rowData[2] = "";
@@ -147,12 +170,33 @@ public class MenuPrincipalJFrame extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void txtFieldFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldFiltroKeyReleased
+        // TODO add your handling code here:
+        List<Projeto> lst = null;
+        
+        lst = _lstProjetos.stream().filter(x -> x.getNomeProjeto().contains(txtFieldFiltro.getText())).collect(Collectors.toList());
+        
+        DefaultTableModel model = (DefaultTableModel)tableProjeto.getModel();
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+        Object rowData[] = new Object[3];
+        
+        for (Projeto item : lst) {
+            rowData[0] = item.getNomeProjeto();
+            rowData[1] = item.getUsuarioProprietario();
+            rowData[2] = "";
+            model.addRow(rowData);
+        }
+    }//GEN-LAST:event_txtFieldFiltroKeyReleased
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableProjeto;
+    private javax.swing.JTextField txtFieldFiltro;
     // End of variables declaration//GEN-END:variables
 }
