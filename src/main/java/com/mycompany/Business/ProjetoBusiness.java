@@ -27,6 +27,10 @@ public class ProjetoBusiness {
         return _projetoDA.Listar();
     }
     
+    public List<Projeto> ListarEstado(){
+        return _projetoDA.ListarEstado();
+    }
+    
     public boolean Adicionar(Projeto projeto){
         boolean retorno = _projetoDA.Adicionar(projeto);
         

@@ -16,6 +16,7 @@ public class Projeto {
     private String nomeProjeto;
     private String descricao;
     private String usuarioProprietario;
+    private String estado;
     
     //Construtor
     public Projeto(){
@@ -60,5 +61,13 @@ public class Projeto {
 
     public void setUsuarioProprietario(String usuarioProprietario) {
         this.usuarioProprietario = usuarioProprietario;
+    }
+    
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

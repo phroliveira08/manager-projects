@@ -141,17 +141,9 @@ public class MenuPrincipalJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        _lstProjetos = _projetoBusiness.Listar();
+        _lstProjetos = _projetoBusiness.ListarEstado();
         
-        DefaultTableModel model = (DefaultTableModel)tableProjeto.getModel();
-        Object rowData[] = new Object[3];
-        
-        for (Projeto item : _lstProjetos) {
-            rowData[0] = item.getNomeProjeto();
-            rowData[1] = item.getUsuarioProprietario();
-            rowData[2] = "";
-            model.addRow(rowData);
-        }
+        carregarTabela(_lstProjetos);
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -174,8 +166,18 @@ public class MenuPrincipalJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         List<Projeto> lst = null;
         
-        lst = _lstProjetos.stream().filter(x -> x.getNomeProjeto().contains(txtFieldFiltro.getText())).collect(Collectors.toList());
+        lst = _lstProjetos
+                .stream()
+                .filter(x -> 
+                        x.getNomeProjeto().toLowerCase().contains(txtFieldFiltro.getText().toLowerCase())
+                        || x.getUsuarioProprietario().toLowerCase().contains(txtFieldFiltro.getText().toLowerCase())
+                        || x.getEstado().toLowerCase().contains(txtFieldFiltro.getText().toLowerCase())
+                ).collect(Collectors.toList());
         
+        carregarTabela(lst);
+    }//GEN-LAST:event_txtFieldFiltroKeyReleased
+
+    public void carregarTabela(List<Projeto> lst){
         DefaultTableModel model = (DefaultTableModel)tableProjeto.getModel();
         model.getDataVector().removeAllElements();
         model.fireTableDataChanged();
@@ -184,11 +186,10 @@ public class MenuPrincipalJFrame extends javax.swing.JFrame {
         for (Projeto item : lst) {
             rowData[0] = item.getNomeProjeto();
             rowData[1] = item.getUsuarioProprietario();
-            rowData[2] = "";
+            rowData[2] = item.getEstado();
             model.addRow(rowData);
         }
-    }//GEN-LAST:event_txtFieldFiltroKeyReleased
-
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
