@@ -47,7 +47,6 @@ public class RequisitoJFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         NovojButton = new javax.swing.JButton();
-        DetalharjButton = new javax.swing.JButton();
         AlterarjButton = new javax.swing.JButton();
         ExcluirjButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -69,8 +68,6 @@ public class RequisitoJFrame extends javax.swing.JFrame {
                 NovojButtonActionPerformed(evt);
             }
         });
-
-        DetalharjButton.setText("Detalhar Requisito");
 
         AlterarjButton.setText("Alterar Requsito");
         AlterarjButton.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +124,6 @@ public class RequisitoJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(NovojButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DetalharjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AlterarjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ExcluirjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
@@ -142,12 +138,10 @@ public class RequisitoJFrame extends javax.swing.JFrame {
                 .addGap(111, 111, 111)
                 .addComponent(NovojButton)
                 .addGap(18, 18, 18)
-                .addComponent(DetalharjButton)
-                .addGap(18, 18, 18)
                 .addComponent(AlterarjButton)
                 .addGap(18, 18, 18)
                 .addComponent(ExcluirjButton)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addContainerGap(196, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -177,10 +171,20 @@ public class RequisitoJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         //this.setVisible(false);
         
+        GerenciarRequisitoJFrame telaGerenciaRequisito = new GerenciarRequisitoJFrame("Criar", _projeto, _pessoaBusiness);
+        
+        telaGerenciaRequisito.setLocationRelativeTo(this);
+        telaGerenciaRequisito.setVisible(true);
     }//GEN-LAST:event_NovojButtonActionPerformed
 
     private void AlterarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarjButtonActionPerformed
         // TODO add your handling code here:
+        int idRequisito = getIdRequisitoSelecionado();
+        Requisito requisito = _requisitoBusiness.Consultar(idRequisito);
+
+        GerenciarRequisitoJFrame telaGerenciaRequisito = new GerenciarRequisitoJFrame("Atualizar", _projeto, _pessoaBusiness, requisito);
+        telaGerenciaRequisito.setLocationRelativeTo(this);
+        telaGerenciaRequisito.setVisible(true);
     }//GEN-LAST:event_AlterarjButtonActionPerformed
 
     private void ExcluirjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirjButtonActionPerformed
@@ -216,10 +220,18 @@ public class RequisitoJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowActivated
 
+    private int getIdRequisitoSelecionado(){
+        int row = requisitojTable.getSelectedRow();
+        
+        DefaultTableModel model = (DefaultTableModel)requisitojTable.getModel();
+        Object columnId = model.getValueAt(row, 0);
+        Integer id = Integer.parseInt(columnId.toString());
+        
+        return id;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AlterarjButton;
-    private javax.swing.JButton DetalharjButton;
     private javax.swing.JButton ExcluirjButton;
     private javax.swing.JButton NovojButton;
     private javax.swing.JButton VoltarjButton;

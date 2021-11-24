@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +22,15 @@ import java.util.TimeZone;
  */
 public class RequisitoDataAccess {
 
-    private ConexaoBD conexaoDB;
+    private ConexaoBD conexaoDB = new ConexaoBD();
+    private Connection c;
 
     public RequisitoDataAccess() {
-        this.conexaoDB = new ConexaoBD();
+         try {
+            this.c = conexaoDB.conectar();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Requisito> Listar(int idProjeto) {
@@ -34,32 +40,30 @@ public class RequisitoDataAccess {
 
         String query = "SELECT * FROM requisitos WHERE fk_idProjeto = ?";
         
-        Connection conn = null;
-        PreparedStatement pstm = null;
-        
         try {
-            conn = conexaoDB.conectar();
             
-            PreparedStatement ps = conn.prepareStatement(query);
+            PreparedStatement ps = c.prepareStatement(query);
             ps.setInt(1, idProjeto);
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
                 requisito = new Requisito();
+                requisito.setId(rs.getInt("idRequisito"));
                 requisito.setNome(rs.getString("nome"));
                 requisito.setModulo(rs.getString("modulo"));
                 requisito.setFuncionalidade(rs.getString("funcionalidades"));
-                requisito.setDataCriacao(rs.getDate("dataCriação"));
+                requisito.setDataCriacao(rs.getDate("dataCriacao"));
                 requisito.setAutor(rs.getString("autor"));
                 requisito.setDataUltimaAlteracao(rs.getDate("dataUltimaAlteracao"));
                 requisito.setAutorUltimaModificacao(rs.getString("autorUltimaModificacao"));
                 requisito.setVersao(rs.getFloat("versao"));
                 requisito.setPrioridade(rs.getString("prioridade"));
                 requisito.setComplexidade(rs.getString("complexidade"));
-                requisito.setEsforcoEmHoras(rs.getInt("esfoçoEmHoras"));
+                requisito.setEsforcoEmHoras(rs.getInt("esforcoEmHoras"));
                 requisito.setEstado(rs.getString("estado"));
                 requisito.setFase(rs.getString("fase"));
-                requisito.setDescricao(rs.getString("descrição"));
+                requisito.setDescricao(rs.getString("descricao"));
+                requisito.setIdProjeto(rs.getInt("fk_idProjeto"));
                 
                 lstRequisitos.add(requisito);
             }
@@ -78,31 +82,30 @@ public class RequisitoDataAccess {
 
         String query = "SELECT * FROM requisitos";
         
-        Connection conn = null;
-        PreparedStatement pstm = null;
         
         try {
-            conn = conexaoDB.conectar();
             
-            PreparedStatement ps = conn.prepareStatement(query);
+            PreparedStatement ps = c.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
                 requisito = new Requisito();
+                requisito.setId(rs.getInt("idRequisito"));
                 requisito.setNome(rs.getString("nome"));
                 requisito.setModulo(rs.getString("modulo"));
                 requisito.setFuncionalidade(rs.getString("funcionalidades"));
-                requisito.setDataCriacao(rs.getDate("dataCriação"));
+                requisito.setDataCriacao(rs.getDate("dataCriacao"));
                 requisito.setAutor(rs.getString("autor"));
                 requisito.setDataUltimaAlteracao(rs.getDate("dataUltimaAlteracao"));
                 requisito.setAutorUltimaModificacao(rs.getString("autorUltimaModificacao"));
                 requisito.setVersao(rs.getFloat("versao"));
                 requisito.setPrioridade(rs.getString("prioridade"));
                 requisito.setComplexidade(rs.getString("complexidade"));
-                requisito.setEsforcoEmHoras(rs.getInt("esfoçoEmHoras"));
+                requisito.setEsforcoEmHoras(rs.getInt("esforcoEmHoras"));
                 requisito.setEstado(rs.getString("estado"));
                 requisito.setFase(rs.getString("fase"));
-                requisito.setDescricao(rs.getString("descrição"));
+                requisito.setDescricao(rs.getString("descricao"));
+                requisito.setIdProjeto(rs.getInt("fk_idProjeto"));
                 
                 lstRequisitos.add(requisito);
             }
@@ -116,42 +119,35 @@ public class RequisitoDataAccess {
 
     public boolean Adicionar(Requisito requisito) {
 
-        String query = "INSERT INTO REQUISITOS VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        Connection conn = null;
-        PreparedStatement pstm = null;
+        String query = "INSERT INTO REQUISITOS(nome, modulo, funcionalidades, dataCriacao, autor, dataUltimaAlteracao, autorUltimaModificacao, versao, prioridade, complexidade, esforcoEmHoras, estado, fase, descricao, fk_idProjeto) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
-            //Cria uma conexão com o banco
-            conn = conexaoDB.conectar();
-
+            
             //Cria um PreparedStatment, classe usada para executar a query
-            pstm = conn.prepareStatement(query);
+            PreparedStatement pstm = c.prepareStatement(query);
 
-            pstm.setString(1, null);
-            pstm.setString(2, requisito.getNome());
-            pstm.setString(3, requisito.getModulo());
-            pstm.setString(4, requisito.getFuncionalidade());
-            pstm.setDate(5, new java.sql.Date(requisito.getDataCriacao().getTime()));
-            pstm.setString(6, requisito.getAutor());
-            pstm.setDate(7, new java.sql.Date(requisito.getDataUltimaAlteracao().getTime()));
-            pstm.setString(8, requisito.getAutorUltimaModificacao());
-            pstm.setFloat(9, requisito.getVersao());
-            pstm.setString(10, requisito.getPrioridade());
-            pstm.setString(11, requisito.getComplexidade());
-            pstm.setInt(12, requisito.getEsforcoEmHoras());
-            pstm.setString(13, requisito.getEstado());
-            pstm.setString(14, requisito.getFase());
-            pstm.setString(15, requisito.getDescricao());
+            pstm.setString(1, requisito.getNome());
+            pstm.setString(2, requisito.getModulo());
+            pstm.setString(3, requisito.getFuncionalidade());
+            pstm.setDate(4, new java.sql.Date(requisito.getDataCriacao().getTime()));
+            pstm.setString(5, requisito.getAutor());
+            pstm.setDate(6, new java.sql.Date(requisito.getDataUltimaAlteracao().getTime()));
+            pstm.setString(7, requisito.getAutorUltimaModificacao());
+            pstm.setFloat(8, requisito.getVersao());
+            pstm.setString(9, requisito.getPrioridade());
+            pstm.setString(10, requisito.getComplexidade());
+            pstm.setInt(11, requisito.getEsforcoEmHoras());
+            pstm.setString(12, requisito.getEstado());
+            pstm.setString(13, requisito.getFase());
+            pstm.setString(14, requisito.getDescricao());
+            pstm.setInt(15, requisito.getIdProjeto());
 
             //Executa a sql para inserção dos dados
             pstm.execute();
 
-            conexaoDB.desconectar(conn);
-
             return true;
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
@@ -159,31 +155,32 @@ public class RequisitoDataAccess {
 
     public boolean Atualizar(Requisito requisito) {
         //UPDATE...
-        String query = "UPDATE REQUISITOS "
-                + "SET dataUltimaAlteracao = ?, "
-                + "autorUltimaModificacao = ?, "
-                + "estado = ? "
-                + "WHERE idRequisito = ?";
-
-        Connection conn = null;
-        PreparedStatement pstm = null;
+        String query = "UPDATE REQUISITOS set nome = ?, modulo = ?, funcionalidades = ?, dataCriacao = ?, autor = ?, dataUltimaAlteracao = ?, autorUltimaModificacao = ?, versao = ?, prioridade = ?, complexidade = ?, esforcoEmHoras = ?, estado = ?, fase = ?, descricao = ?, fk_idProjeto = ?  WHERE idRequisito = ?";
 
         try {
-            //Cria uma conexão com o banco
-            conn = conexaoDB.conectar();
-
+            
             //Cria um PreparedStatment, classe usada para executar a query
-            pstm = conn.prepareStatement(query);
+            PreparedStatement pstm = c.prepareStatement(query);
 
-            pstm.setDate(1, new java.sql.Date(requisito.getDataUltimaAlteracao().getTime()));
-            pstm.setString(2, requisito.getAutorUltimaModificacao());
-            pstm.setString(3, requisito.getEstado());
-            pstm.setInt(4, requisito.getId());
+            pstm.setString(1, requisito.getNome());
+            pstm.setString(2, requisito.getModulo());
+            pstm.setString(3, requisito.getFuncionalidade());
+            pstm.setDate(4, new java.sql.Date(requisito.getDataCriacao().getTime()));
+            pstm.setString(5, requisito.getAutor());
+            pstm.setDate(6, new java.sql.Date(requisito.getDataUltimaAlteracao().getTime()));
+            pstm.setString(7, requisito.getAutorUltimaModificacao());
+            pstm.setFloat(8, requisito.getVersao());
+            pstm.setString(9, requisito.getPrioridade());
+            pstm.setString(10, requisito.getComplexidade());
+            pstm.setInt(11, requisito.getEsforcoEmHoras());
+            pstm.setString(12, requisito.getEstado());
+            pstm.setString(13, requisito.getFase());
+            pstm.setString(14, requisito.getDescricao());
+            pstm.setInt(15, requisito.getIdProjeto());
+            pstm.setInt(16, requisito.getId());
 
             //Executa a sql para inserção dos dados
             pstm.execute();
-
-            conexaoDB.desconectar(conn);
 
             return true;
 
@@ -239,20 +236,22 @@ public class RequisitoDataAccess {
             
             while (rs.next()) {
                 requisito = new Requisito();
+                requisito.setId(rs.getInt("idRequisito"));
                 requisito.setNome(rs.getString("nome"));
                 requisito.setModulo(rs.getString("modulo"));
                 requisito.setFuncionalidade(rs.getString("funcionalidades"));
-                requisito.setDataCriacao(rs.getDate("dataCriação"));
+                requisito.setDataCriacao(rs.getDate("dataCriacao"));
                 requisito.setAutor(rs.getString("autor"));
                 requisito.setDataUltimaAlteracao(rs.getDate("dataUltimaAlteracao"));
                 requisito.setAutorUltimaModificacao(rs.getString("autorUltimaModificacao"));
                 requisito.setVersao(rs.getFloat("versao"));
                 requisito.setPrioridade(rs.getString("prioridade"));
                 requisito.setComplexidade(rs.getString("complexidade"));
-                requisito.setEsforcoEmHoras(rs.getInt("esfoçoEmHoras"));
+                requisito.setEsforcoEmHoras(rs.getInt("esforcoEmHoras"));
                 requisito.setEstado(rs.getString("estado"));
                 requisito.setFase(rs.getString("fase"));
-                requisito.setDescricao(rs.getString("descrição"));
+                requisito.setDescricao(rs.getString("descricao"));
+                requisito.setIdProjeto(rs.getInt("fk_idProjeto"));
             }
 
             return requisito;

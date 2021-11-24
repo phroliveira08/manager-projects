@@ -28,6 +28,15 @@ public class Requisito {
     private String estado;
     private String fase;
     private String descricao;
+    private int idProjeto;
+
+    public int getIdProjeto() {
+        return idProjeto;
+    }
+
+    public void setIdProjeto(int idProjeto) {
+        this.idProjeto = idProjeto;
+    }
 
     public Requisito(){
     }
