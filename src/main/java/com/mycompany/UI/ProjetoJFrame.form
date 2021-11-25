@@ -88,6 +88,7 @@
     <Component class="javax.swing.JButton" name="DetalharjButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Detalhar Projeto"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DetalharjButtonActionPerformed"/>
@@ -96,6 +97,7 @@
     <Component class="javax.swing.JButton" name="AlterarjButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Alterar Projeto"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AlterarjButtonActionPerformed"/>
@@ -104,6 +106,7 @@
     <Component class="javax.swing.JButton" name="ExcluirjButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Excluir Projeto"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ExcluirjButtonActionPerformed"/>
@@ -162,6 +165,9 @@
               <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="projetojTableMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -48,6 +48,11 @@ public class TrocarSenhaJFrame extends javax.swing.JFrame {
                 senhaRepetidaFieldActionPerformed(evt);
             }
         });
+        senhaRepetidaField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                senhaRepetidaFieldKeyPressed(evt);
+            }
+        });
 
         senhaLabel.setText("Nova senha:");
 
@@ -121,6 +126,10 @@ public class TrocarSenhaJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Senha incompativeis.");
         }
     }//GEN-LAST:event_confirmarButtonActionPerformed
+
+    private void senhaRepetidaFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_senhaRepetidaFieldKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_senhaRepetidaFieldKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -70,6 +70,7 @@ public class RequisitoJFrame extends javax.swing.JFrame {
         });
 
         AlterarjButton.setText("Alterar Requsito");
+        AlterarjButton.setEnabled(false);
         AlterarjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AlterarjButtonActionPerformed(evt);
@@ -77,6 +78,7 @@ public class RequisitoJFrame extends javax.swing.JFrame {
         });
 
         ExcluirjButton.setText("Excluir Requsito");
+        ExcluirjButton.setEnabled(false);
         ExcluirjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ExcluirjButtonActionPerformed(evt);
@@ -107,6 +109,11 @@ public class RequisitoJFrame extends javax.swing.JFrame {
             }
         });
         requisitojTable.getTableHeader().setReorderingAllowed(false);
+        requisitojTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                requisitojTableMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(requisitojTable);
 
         VoltarjButton.setText("Voltar");
@@ -218,7 +225,24 @@ public class RequisitoJFrame extends javax.swing.JFrame {
             rowData[2] = item.getEstado();
             model.addRow(rowData);
         }
+        int row = requisitojTable.getSelectedRow();
+        if(row == -1){
+            AlterarjButton.setEnabled(false);
+            ExcluirjButton.setEnabled(false);
+        } else{
+            AlterarjButton.setEnabled(true);
+            ExcluirjButton.setEnabled(true);
+        }
     }//GEN-LAST:event_formWindowActivated
+
+    private void requisitojTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requisitojTableMouseClicked
+        // TODO add your handling code here:
+        int row = requisitojTable.getSelectedRow();
+        if(row != -1){
+            AlterarjButton.setEnabled(true);
+            ExcluirjButton.setEnabled(true);
+        }
+    }//GEN-LAST:event_requisitojTableMouseClicked
 
     private int getIdRequisitoSelecionado(){
         int row = requisitojTable.getSelectedRow();

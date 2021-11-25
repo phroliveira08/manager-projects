@@ -66,6 +66,7 @@ public class ProjetoJFrame extends javax.swing.JFrame {
         });
 
         DetalharjButton.setText("Detalhar Projeto");
+        DetalharjButton.setEnabled(false);
         DetalharjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DetalharjButtonActionPerformed(evt);
@@ -73,6 +74,7 @@ public class ProjetoJFrame extends javax.swing.JFrame {
         });
 
         AlterarjButton.setText("Alterar Projeto");
+        AlterarjButton.setEnabled(false);
         AlterarjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AlterarjButtonActionPerformed(evt);
@@ -80,6 +82,7 @@ public class ProjetoJFrame extends javax.swing.JFrame {
         });
 
         ExcluirjButton.setText("Excluir Projeto");
+        ExcluirjButton.setEnabled(false);
         ExcluirjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ExcluirjButtonActionPerformed(evt);
@@ -117,6 +120,11 @@ public class ProjetoJFrame extends javax.swing.JFrame {
             }
         });
         projetojTable.getTableHeader().setReorderingAllowed(false);
+        projetojTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                projetojTableMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(projetojTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -197,7 +205,7 @@ public class ProjetoJFrame extends javax.swing.JFrame {
 
     private void VoltarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarjButtonActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        this.dispose();
         _menuPrincipal.setVisible(true);
     }//GEN-LAST:event_VoltarjButtonActionPerformed
 
@@ -217,6 +225,16 @@ public class ProjetoJFrame extends javax.swing.JFrame {
             rowData[3] = item.getDescricao();
             model.addRow(rowData);
         }
+        int row = projetojTable.getSelectedRow();
+        if(row == -1){
+            AlterarjButton.setEnabled(false);
+            ExcluirjButton.setEnabled(false);
+            DetalharjButton.setEnabled(false);
+        } else{
+            AlterarjButton.setEnabled(true);
+            ExcluirjButton.setEnabled(true);
+            DetalharjButton.setEnabled(true);
+        }
     }//GEN-LAST:event_formWindowActivated
 
     private void DetalharjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetalharjButtonActionPerformed
@@ -230,6 +248,16 @@ public class ProjetoJFrame extends javax.swing.JFrame {
         telaRequisito.setLocationRelativeTo(this);
         telaRequisito.setVisible(true);
     }//GEN-LAST:event_DetalharjButtonActionPerformed
+
+    private void projetojTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_projetojTableMouseClicked
+        // TODO add your handling code here:
+        int row = projetojTable.getSelectedRow();
+        if(row != -1){
+            AlterarjButton.setEnabled(true);
+            ExcluirjButton.setEnabled(true);
+            DetalharjButton.setEnabled(true);
+        }
+    }//GEN-LAST:event_projetojTableMouseClicked
 
     private int getIdProjetoSelecionado(){
         int row = projetojTable.getSelectedRow();
