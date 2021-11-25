@@ -41,7 +41,7 @@ public class MenuPrincipalJFrame extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnRelatorio = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableProjeto = new javax.swing.JTable();
         txtFieldFiltro = new javax.swing.JTextField();
@@ -68,7 +68,12 @@ public class MenuPrincipalJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Relatórios");
+        btnRelatorio.setText("Relatórios");
+        btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioActionPerformed(evt);
+            }
+        });
 
         tableProjeto.setAutoCreateRowSorter(true);
         tableProjeto.setModel(new javax.swing.table.DefaultTableModel(
@@ -107,7 +112,7 @@ public class MenuPrincipalJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
@@ -133,7 +138,7 @@ public class MenuPrincipalJFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)))
+                        .addComponent(btnRelatorio)))
                 .addContainerGap())
         );
 
@@ -177,6 +182,14 @@ public class MenuPrincipalJFrame extends javax.swing.JFrame {
         carregarTabela(lst);
     }//GEN-LAST:event_txtFieldFiltroKeyReleased
 
+    private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
+        // TODO add your handling code here:
+        ProjetoRelatorioJFrame projetoRelatorio = new ProjetoRelatorioJFrame(this);
+        projetoRelatorio.setVisible(true);
+        projetoRelatorio.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnRelatorioActionPerformed
+
     public void carregarTabela(List<Projeto> lst){
         DefaultTableModel model = (DefaultTableModel)tableProjeto.getModel();
         model.getDataVector().removeAllElements();
@@ -192,9 +205,9 @@ public class MenuPrincipalJFrame extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRelatorio;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableProjeto;
