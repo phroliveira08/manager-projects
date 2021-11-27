@@ -48,7 +48,9 @@ public class ProjetoRelatorioJFrame extends javax.swing.JFrame {
         txtFiltro = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Relatório");
         setPreferredSize(new java.awt.Dimension(630, 458));
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);

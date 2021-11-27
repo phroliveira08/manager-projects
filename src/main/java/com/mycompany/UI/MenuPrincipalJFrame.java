@@ -11,6 +11,7 @@ import com.mycompany.Business.ProjetoBusiness;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.util.stream.Collectors;
+import javax.swing.ImageIcon;
 /**
  *
  * @author Kelvin
@@ -48,6 +49,8 @@ public class MenuPrincipalJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menu Principal");
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);

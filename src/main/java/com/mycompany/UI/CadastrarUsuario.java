@@ -283,17 +283,26 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (_finalidadeTela.equals("Atualizar")) {
             Salvar.setText("Atualizar");
+            this.setTitle("Atualizar Usuario");
+            jLabel3.setText("Atualizar Usuario");
             String nome = _pessoa.getNomeCompleto();
             String telefone = _pessoa.getTelefone();
             String email = _pessoa.getEmail();
             String cargo = _pessoa.getCargo();
+            String username = _pessoa.getUsername();
+            String senha = _pessoa.getSenha();
             jTextField1.setText(nome);
             jTextField2.setText(telefone);
             jTextField3.setText(email);
             jTextField4.setText(cargo);
             jTextField5.setEnabled(false);
+            jTextField5.setText(username);
             jPasswordField1.setEnabled(false);
+            jPasswordField1.setText(senha);
             jPasswordField2.setEnabled(false);
+            jPasswordField2.setText(senha);
+        } else{
+            this.setTitle("Cadastrar Usuario");
         }
     }//GEN-LAST:event_formWindowActivated
 

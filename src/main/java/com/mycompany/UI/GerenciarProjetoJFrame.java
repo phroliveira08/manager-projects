@@ -56,6 +56,7 @@ public class GerenciarProjetoJFrame extends javax.swing.JFrame {
         descricaojTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -164,6 +165,9 @@ public class GerenciarProjetoJFrame extends javax.swing.JFrame {
             String descricao = _projeto.getDescricao();
             nomejTextField.setText(nome);
             descricaojTextArea.setText(descricao);
+            this.setTitle("Atualizar Projeto");
+        } else {
+            this.setTitle("Cadastrar Projeto");
         }
     }//GEN-LAST:event_formWindowActivated
 

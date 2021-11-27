@@ -41,6 +41,7 @@ public class AddRequisitoJFrame extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         rbFuncional.setLabel("Funcional");
 

@@ -77,6 +77,8 @@ public class GerenciarRequisitoJFrame extends javax.swing.JFrame {
         estadojComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Requisitos");
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -307,6 +309,7 @@ public class GerenciarRequisitoJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(_finalidadeTela.equals("Atualizar")){
             confirmarjButton.setText("Atualizar");
+            this.setTitle("Atualizar Requisitos");
             String nome = _requisito.getNome();
             String modulo = _requisito.getModulo();
             String funcionalidade = _requisito.getFuncionalidade();
@@ -334,6 +337,8 @@ public class GerenciarRequisitoJFrame extends javax.swing.JFrame {
             estadojComboBox.setSelectedIndex(estadoItem);
             fasejTextField.setText(fase);
             descricaojTextArea.setText(descricao);
+        } else{
+            this.setTitle("Cadastrar Requisitos");
         }
     }//GEN-LAST:event_formWindowActivated
 
