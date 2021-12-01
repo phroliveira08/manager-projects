@@ -21,7 +21,7 @@ public class LoginJFrame extends javax.swing.JFrame {
      */
     public LoginJFrame() {
         initComponents();
-
+        //this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/script-java.PNG")).getImage());
     }
 
     /**
